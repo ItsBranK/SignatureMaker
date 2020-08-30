@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SigKit")]
-[assembly: AssemblyDescription("Signature Toolkit/Maker")]
+[assembly: AssemblyTitle("Signature Maker")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("https://github.com/ItsBranK/")]
-[assembly: AssemblyProduct("SigKit")]
+[assembly: AssemblyProduct("Signature Maker")]
 [assembly: AssemblyCopyright("Copyright © ItsBranK 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SigMaker.Properties
+namespace Signature_Maker.Properties
 {
 
 
