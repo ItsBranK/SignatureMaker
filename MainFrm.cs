@@ -8,7 +8,7 @@ namespace Signature_Maker {
         Color greenClr = Color.FromArgb(0, 225, 50);
         Color blueClr = Color.FromArgb(0, 0, 255);
 
-        enum modes : byte {
+        enum modes {
             half = 0,
             full = 1,
             code = 2,
@@ -173,12 +173,12 @@ namespace Signature_Maker {
         }
 
         private void CompareBtn_Click(object sender, EventArgs e) {
-            if (baseBx.Text.Length > 0 && compareBx.Text.Length > 0) {
+            if (!string.IsNullOrEmpty(baseBx.Text) && !string.IsNullOrEmpty(compareBx.Text)) {
                 differenceBx.Text = compareBytes(baseBx.Text, compareBx.Text);
                 halfMaskBx.Text = generateMask(differenceBx.Text, modes.half);
                 fullMaskBx.Text = generateMask(differenceBx.Text, modes.full);
-                codeBx.Text = generateMask(differenceBx.Text, modes.code);
-                arrayBx.Text = generateMask(differenceBx.Text, modes.array);
+                codeBx.Text = generateBytes(differenceBx.Text, modes.code);
+                arrayBx.Text = generateBytes(differenceBx.Text, modes.array);
             }
         }
 
