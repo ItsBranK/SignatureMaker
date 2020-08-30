@@ -1,6 +1,6 @@
-### Signature Maker v1.0
+### Signature Maker v1.1
 
-Small program intended to help out in the process of making signatures.
+A tool intended to help out in the process of making signatures.
 
 - Compares and displays the differences in the provided AOBs
 - Generates a full byte and half byte mask based on the difference
