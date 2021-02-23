@@ -1,9 +1,0 @@
-E:\Files\Visual Studio Projects\Signature Maker\bin\x64\Release\Signature Maker.exe.config
-E:\Files\Visual Studio Projects\Signature Maker\bin\x64\Release\Signature Maker.exe
-E:\Files\Visual Studio Projects\Signature Maker\bin\x64\Release\Signature Maker.pdb
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature_Maker.MainFrm.resources
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature Maker.Properties.Resources.resources
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature Maker.csproj.GenerateResource.cache
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature Maker.csproj.CoreCompileInputs.cache
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature Maker.exe
-E:\Files\Visual Studio Projects\Signature Maker\obj\x64\Release\Signature Maker.pdb

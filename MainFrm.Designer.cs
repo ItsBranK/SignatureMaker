@@ -39,9 +39,9 @@
             this.CompareCopyBtn = new System.Windows.Forms.Button();
             this.StatusLbl = new System.Windows.Forms.Label();
             this.BaseBox = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.InputGroupBox = new System.Windows.Forms.GroupBox();
             this.ResetBtn = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.MaskCopyBtn = new System.Windows.Forms.Button();
             this.ByteArrayCopyBtn = new System.Windows.Forms.Button();
             this.HexEcapedCopyBtn = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@
             this.MaskLbl = new System.Windows.Forms.Label();
             this.DifferenceBox = new System.Windows.Forms.TextBox();
             this.DifferenceLbl = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ProcessGroupBox = new System.Windows.Forms.GroupBox();
             this.PIDBox = new System.Windows.Forms.NumericUpDown();
             this.ProcessBox = new System.Windows.Forms.ComboBox();
             this.CreateBtn = new System.Windows.Forms.Button();
@@ -68,10 +68,9 @@
             this.ProcessLbl = new System.Windows.Forms.Label();
             this.AddressLbl = new System.Windows.Forms.Label();
             this.AddressBox = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.InputGroupBox.SuspendLayout();
+            this.OutputGroupBox.SuspendLayout();
+            this.ProcessGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).BeginInit();
             this.SuspendLayout();
@@ -203,25 +202,25 @@
             this.BaseBox.Size = new System.Drawing.Size(350, 25);
             this.BaseBox.TabIndex = 31;
             // 
-            // groupBox1
+            // InputGroupBox
             // 
-            this.groupBox1.Controls.Add(this.ResetBtn);
-            this.groupBox1.Controls.Add(this.BaseLbl);
-            this.groupBox1.Controls.Add(this.CompareLbl);
-            this.groupBox1.Controls.Add(this.CompareBox);
-            this.groupBox1.Controls.Add(this.CompareBtn);
-            this.groupBox1.Controls.Add(this.SwapBtn);
-            this.groupBox1.Controls.Add(this.BaseBox);
-            this.groupBox1.Controls.Add(this.BaseCopyBtn);
-            this.groupBox1.Controls.Add(this.BasePasteBtn);
-            this.groupBox1.Controls.Add(this.CompareCopyBtn);
-            this.groupBox1.Controls.Add(this.ComparePasteBtn);
-            this.groupBox1.Location = new System.Drawing.Point(12, 133);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(535, 112);
-            this.groupBox1.TabIndex = 37;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Input";
+            this.InputGroupBox.Controls.Add(this.ResetBtn);
+            this.InputGroupBox.Controls.Add(this.BaseLbl);
+            this.InputGroupBox.Controls.Add(this.CompareLbl);
+            this.InputGroupBox.Controls.Add(this.CompareBox);
+            this.InputGroupBox.Controls.Add(this.CompareBtn);
+            this.InputGroupBox.Controls.Add(this.SwapBtn);
+            this.InputGroupBox.Controls.Add(this.BaseBox);
+            this.InputGroupBox.Controls.Add(this.BaseCopyBtn);
+            this.InputGroupBox.Controls.Add(this.BasePasteBtn);
+            this.InputGroupBox.Controls.Add(this.CompareCopyBtn);
+            this.InputGroupBox.Controls.Add(this.ComparePasteBtn);
+            this.InputGroupBox.Location = new System.Drawing.Point(12, 133);
+            this.InputGroupBox.Name = "InputGroupBox";
+            this.InputGroupBox.Size = new System.Drawing.Size(535, 112);
+            this.InputGroupBox.TabIndex = 37;
+            this.InputGroupBox.TabStop = false;
+            this.InputGroupBox.Text = "Input";
             // 
             // ResetBtn
             // 
@@ -235,30 +234,30 @@
             this.ResetBtn.UseVisualStyleBackColor = true;
             this.ResetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
-            // groupBox2
+            // OutputGroupBox
             // 
-            this.groupBox2.Controls.Add(this.MaskCopyBtn);
-            this.groupBox2.Controls.Add(this.ByteArrayCopyBtn);
-            this.groupBox2.Controls.Add(this.HexEcapedCopyBtn);
-            this.groupBox2.Controls.Add(this.HexCopyBtn);
-            this.groupBox2.Controls.Add(this.DifferenceCopyBtn);
-            this.groupBox2.Controls.Add(this.ByteArrayBox);
-            this.groupBox2.Controls.Add(this.ByteArrayLbl);
-            this.groupBox2.Controls.Add(this.HexEscapedBox);
-            this.groupBox2.Controls.Add(this.HexEscapedLbl);
-            this.groupBox2.Controls.Add(this.HexBox);
-            this.groupBox2.Controls.Add(this.HexLbl);
-            this.groupBox2.Controls.Add(this.MaskBox);
-            this.groupBox2.Controls.Add(this.MaskLbl);
-            this.groupBox2.Controls.Add(this.DifferenceBox);
-            this.groupBox2.Controls.Add(this.StatusLbl);
-            this.groupBox2.Controls.Add(this.DifferenceLbl);
-            this.groupBox2.Location = new System.Drawing.Point(12, 251);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(535, 205);
-            this.groupBox2.TabIndex = 40;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Output";
+            this.OutputGroupBox.Controls.Add(this.MaskCopyBtn);
+            this.OutputGroupBox.Controls.Add(this.ByteArrayCopyBtn);
+            this.OutputGroupBox.Controls.Add(this.HexEcapedCopyBtn);
+            this.OutputGroupBox.Controls.Add(this.HexCopyBtn);
+            this.OutputGroupBox.Controls.Add(this.DifferenceCopyBtn);
+            this.OutputGroupBox.Controls.Add(this.ByteArrayBox);
+            this.OutputGroupBox.Controls.Add(this.ByteArrayLbl);
+            this.OutputGroupBox.Controls.Add(this.HexEscapedBox);
+            this.OutputGroupBox.Controls.Add(this.HexEscapedLbl);
+            this.OutputGroupBox.Controls.Add(this.HexBox);
+            this.OutputGroupBox.Controls.Add(this.HexLbl);
+            this.OutputGroupBox.Controls.Add(this.MaskBox);
+            this.OutputGroupBox.Controls.Add(this.MaskLbl);
+            this.OutputGroupBox.Controls.Add(this.DifferenceBox);
+            this.OutputGroupBox.Controls.Add(this.StatusLbl);
+            this.OutputGroupBox.Controls.Add(this.DifferenceLbl);
+            this.OutputGroupBox.Location = new System.Drawing.Point(12, 251);
+            this.OutputGroupBox.Name = "OutputGroupBox";
+            this.OutputGroupBox.Size = new System.Drawing.Size(535, 205);
+            this.OutputGroupBox.TabIndex = 40;
+            this.OutputGroupBox.TabStop = false;
+            this.OutputGroupBox.Text = "Output";
             // 
             // MaskCopyBtn
             // 
@@ -435,24 +434,24 @@
             this.DifferenceLbl.Text = "Difference:";
             this.DifferenceLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // groupBox3
+            // ProcessGroupBox
             // 
-            this.groupBox3.Controls.Add(this.PIDBox);
-            this.groupBox3.Controls.Add(this.ProcessBox);
-            this.groupBox3.Controls.Add(this.CreateBtn);
-            this.groupBox3.Controls.Add(this.AddressPasteBtn);
-            this.groupBox3.Controls.Add(this.LengthLbl);
-            this.groupBox3.Controls.Add(this.LengthBox);
-            this.groupBox3.Controls.Add(this.RefreshBtn);
-            this.groupBox3.Controls.Add(this.ProcessLbl);
-            this.groupBox3.Controls.Add(this.AddressLbl);
-            this.groupBox3.Controls.Add(this.AddressBox);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(535, 115);
-            this.groupBox3.TabIndex = 41;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Process (Optional)";
+            this.ProcessGroupBox.Controls.Add(this.PIDBox);
+            this.ProcessGroupBox.Controls.Add(this.ProcessBox);
+            this.ProcessGroupBox.Controls.Add(this.CreateBtn);
+            this.ProcessGroupBox.Controls.Add(this.AddressPasteBtn);
+            this.ProcessGroupBox.Controls.Add(this.LengthLbl);
+            this.ProcessGroupBox.Controls.Add(this.LengthBox);
+            this.ProcessGroupBox.Controls.Add(this.RefreshBtn);
+            this.ProcessGroupBox.Controls.Add(this.ProcessLbl);
+            this.ProcessGroupBox.Controls.Add(this.AddressLbl);
+            this.ProcessGroupBox.Controls.Add(this.AddressBox);
+            this.ProcessGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.ProcessGroupBox.Name = "ProcessGroupBox";
+            this.ProcessGroupBox.Size = new System.Drawing.Size(535, 115);
+            this.ProcessGroupBox.TabIndex = 41;
+            this.ProcessGroupBox.TabStop = false;
+            this.ProcessGroupBox.Text = "Process (Optional)";
             // 
             // PIDBox
             // 
@@ -595,23 +594,14 @@
             this.AddressBox.Size = new System.Drawing.Size(295, 25);
             this.AddressBox.TabIndex = 3;
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(559, 24);
-            this.menuStrip1.TabIndex = 42;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 466);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.ProcessGroupBox);
+            this.Controls.Add(this.OutputGroupBox);
+            this.Controls.Add(this.InputGroupBox);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -620,16 +610,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ItsBranK\'s Signature Maker (x64)";
             this.Load += new System.EventHandler(this.MainFrm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.InputGroupBox.ResumeLayout(false);
+            this.InputGroupBox.PerformLayout();
+            this.OutputGroupBox.ResumeLayout(false);
+            this.OutputGroupBox.PerformLayout();
+            this.ProcessGroupBox.ResumeLayout(false);
+            this.ProcessGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -646,8 +635,8 @@
         private System.Windows.Forms.Button CompareCopyBtn;
         private System.Windows.Forms.Label StatusLbl;
         private System.Windows.Forms.ComboBox BaseBox;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox InputGroupBox;
+        private System.Windows.Forms.GroupBox OutputGroupBox;
         private System.Windows.Forms.TextBox ByteArrayBox;
         private System.Windows.Forms.Label ByteArrayLbl;
         private System.Windows.Forms.TextBox HexEscapedBox;
@@ -664,7 +653,7 @@
         private System.Windows.Forms.Button HexCopyBtn;
         private System.Windows.Forms.Button DifferenceCopyBtn;
         private System.Windows.Forms.Button ResetBtn;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox ProcessGroupBox;
         private System.Windows.Forms.NumericUpDown LengthBox;
         private System.Windows.Forms.Button RefreshBtn;
         private System.Windows.Forms.Label ProcessLbl;
@@ -673,7 +662,6 @@
         private System.Windows.Forms.Button AddressPasteBtn;
         private System.Windows.Forms.Label LengthLbl;
         private System.Windows.Forms.Button CreateBtn;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ComboBox ProcessBox;
         private System.Windows.Forms.NumericUpDown PIDBox;
     }
