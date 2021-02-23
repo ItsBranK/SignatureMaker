@@ -1,6 +1,6 @@
 ﻿namespace Signature_Maker
 {
-    partial class mainFrm
+    partial class MainFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,401 +28,606 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.baseLbl = new System.Windows.Forms.Label();
-            this.compareBx = new System.Windows.Forms.TextBox();
-            this.compareLbl = new System.Windows.Forms.Label();
-            this.compareBtn = new System.Windows.Forms.Button();
-            this.resetBtn = new System.Windows.Forms.Button();
-            this.baseCpyBtn = new System.Windows.Forms.Button();
-            this.basePstBtn = new System.Windows.Forms.Button();
-            this.comparePstBtn = new System.Windows.Forms.Button();
-            this.compareCpyBtn = new System.Windows.Forms.Button();
-            this.differenceBx = new System.Windows.Forms.TextBox();
-            this.differenceLbl = new System.Windows.Forms.Label();
-            this.differenceCpyBtn = new System.Windows.Forms.Button();
-            this.halfMaskCpyBtn = new System.Windows.Forms.Button();
-            this.halfMaskLbl = new System.Windows.Forms.Label();
-            this.halfMaskBx = new System.Windows.Forms.TextBox();
-            this.codeCpyBtn = new System.Windows.Forms.Button();
-            this.codeLbl = new System.Windows.Forms.Label();
-            this.codeBx = new System.Windows.Forms.TextBox();
-            this.statusLbl = new System.Windows.Forms.Label();
-            this.arrayCpyBtn = new System.Windows.Forms.Button();
-            this.arrayLbl = new System.Windows.Forms.Label();
-            this.arrayBx = new System.Windows.Forms.TextBox();
-            this.creditsLbl = new System.Windows.Forms.Label();
-            this.swapBtn = new System.Windows.Forms.Button();
-            this.fullMaskCpyBtn = new System.Windows.Forms.Button();
-            this.fullMaskLbl = new System.Windows.Forms.Label();
-            this.fullMaskBx = new System.Windows.Forms.TextBox();
-            this.baseBx = new System.Windows.Forms.ComboBox();
+            this.BaseLbl = new System.Windows.Forms.Label();
+            this.CompareBox = new System.Windows.Forms.TextBox();
+            this.CompareLbl = new System.Windows.Forms.Label();
+            this.CompareBtn = new System.Windows.Forms.Button();
+            this.SwapBtn = new System.Windows.Forms.Button();
+            this.BaseCopyBtn = new System.Windows.Forms.Button();
+            this.BasePasteBtn = new System.Windows.Forms.Button();
+            this.ComparePasteBtn = new System.Windows.Forms.Button();
+            this.CompareCopyBtn = new System.Windows.Forms.Button();
+            this.StatusLbl = new System.Windows.Forms.Label();
+            this.BaseBox = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ResetBtn = new System.Windows.Forms.Button();
+            this.MaskCopyBtn = new System.Windows.Forms.Button();
+            this.ByteArrayCopyBtn = new System.Windows.Forms.Button();
+            this.HexEcapedCopyBtn = new System.Windows.Forms.Button();
+            this.HexCopyBtn = new System.Windows.Forms.Button();
+            this.DifferenceCopyBtn = new System.Windows.Forms.Button();
+            this.ByteArrayBox = new System.Windows.Forms.TextBox();
+            this.ByteArrayLbl = new System.Windows.Forms.Label();
+            this.HexEscapedBox = new System.Windows.Forms.TextBox();
+            this.HexEscapedLbl = new System.Windows.Forms.Label();
+            this.HexBox = new System.Windows.Forms.TextBox();
+            this.HexLbl = new System.Windows.Forms.Label();
+            this.MaskBox = new System.Windows.Forms.TextBox();
+            this.MaskLbl = new System.Windows.Forms.Label();
+            this.DifferenceBox = new System.Windows.Forms.TextBox();
+            this.DifferenceLbl = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ProcessBox = new System.Windows.Forms.ComboBox();
+            this.CreateBtn = new System.Windows.Forms.Button();
+            this.AddressPasteBtn = new System.Windows.Forms.Button();
+            this.LengthLbl = new System.Windows.Forms.Label();
+            this.LengthBox = new System.Windows.Forms.NumericUpDown();
+            this.RefreshBtn = new System.Windows.Forms.Button();
+            this.ProcessLbl = new System.Windows.Forms.Label();
+            this.AddressLbl = new System.Windows.Forms.Label();
+            this.AddressBox = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.PIDBox = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // baseLbl
+            // BaseLbl
             // 
-            this.baseLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baseLbl.ForeColor = System.Drawing.Color.Black;
-            this.baseLbl.Location = new System.Drawing.Point(10, 10);
-            this.baseLbl.Name = "baseLbl";
-            this.baseLbl.Size = new System.Drawing.Size(125, 25);
-            this.baseLbl.TabIndex = 0;
-            this.baseLbl.Text = "Original/Base AOB:";
-            this.baseLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BaseLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BaseLbl.ForeColor = System.Drawing.Color.Black;
+            this.BaseLbl.Location = new System.Drawing.Point(6, 18);
+            this.BaseLbl.Name = "BaseLbl";
+            this.BaseLbl.Size = new System.Drawing.Size(105, 25);
+            this.BaseLbl.TabIndex = 0;
+            this.BaseLbl.Text = "Base AOB:";
+            this.BaseLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // compareBx
+            // CompareBox
             // 
-            this.compareBx.BackColor = System.Drawing.Color.White;
-            this.compareBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.compareBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareBx.ForeColor = System.Drawing.Color.Black;
-            this.compareBx.Location = new System.Drawing.Point(140, 40);
-            this.compareBx.Name = "compareBx";
-            this.compareBx.Size = new System.Drawing.Size(420, 25);
-            this.compareBx.TabIndex = 3;
+            this.CompareBox.BackColor = System.Drawing.Color.White;
+            this.CompareBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CompareBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompareBox.ForeColor = System.Drawing.Color.Black;
+            this.CompareBox.Location = new System.Drawing.Point(117, 48);
+            this.CompareBox.Name = "CompareBox";
+            this.CompareBox.Size = new System.Drawing.Size(350, 25);
+            this.CompareBox.TabIndex = 3;
             // 
-            // compareLbl
+            // CompareLbl
             // 
-            this.compareLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareLbl.ForeColor = System.Drawing.Color.Black;
-            this.compareLbl.Location = new System.Drawing.Point(10, 40);
-            this.compareLbl.Name = "compareLbl";
-            this.compareLbl.Size = new System.Drawing.Size(125, 25);
-            this.compareLbl.TabIndex = 2;
-            this.compareLbl.Text = "AOB to Compare:";
-            this.compareLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CompareLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompareLbl.ForeColor = System.Drawing.Color.Black;
+            this.CompareLbl.Location = new System.Drawing.Point(6, 48);
+            this.CompareLbl.Name = "CompareLbl";
+            this.CompareLbl.Size = new System.Drawing.Size(105, 25);
+            this.CompareLbl.TabIndex = 2;
+            this.CompareLbl.Text = "Comapre AOB:";
+            this.CompareLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // compareBtn
+            // CompareBtn
             // 
-            this.compareBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareBtn.ForeColor = System.Drawing.Color.Black;
-            this.compareBtn.Location = new System.Drawing.Point(140, 70);
-            this.compareBtn.Name = "compareBtn";
-            this.compareBtn.Size = new System.Drawing.Size(205, 25);
-            this.compareBtn.TabIndex = 4;
-            this.compareBtn.Text = "Compare";
-            this.compareBtn.UseVisualStyleBackColor = true;
-            this.compareBtn.Click += new System.EventHandler(this.CompareBtn_Click);
+            this.CompareBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompareBtn.ForeColor = System.Drawing.Color.Black;
+            this.CompareBtn.Location = new System.Drawing.Point(117, 79);
+            this.CompareBtn.Name = "CompareBtn";
+            this.CompareBtn.Size = new System.Drawing.Size(172, 25);
+            this.CompareBtn.TabIndex = 4;
+            this.CompareBtn.Text = "Compare";
+            this.CompareBtn.UseVisualStyleBackColor = true;
+            this.CompareBtn.Click += new System.EventHandler(this.CompareBtn_Click);
             // 
-            // resetBtn
+            // SwapBtn
             // 
-            this.resetBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetBtn.ForeColor = System.Drawing.Color.Black;
-            this.resetBtn.Location = new System.Drawing.Point(355, 70);
-            this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(205, 25);
-            this.resetBtn.TabIndex = 5;
-            this.resetBtn.Text = "Reset All";
-            this.resetBtn.UseVisualStyleBackColor = true;
-            this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
+            this.SwapBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwapBtn.ForeColor = System.Drawing.Color.Black;
+            this.SwapBtn.Location = new System.Drawing.Point(295, 79);
+            this.SwapBtn.Name = "SwapBtn";
+            this.SwapBtn.Size = new System.Drawing.Size(172, 25);
+            this.SwapBtn.TabIndex = 5;
+            this.SwapBtn.Text = "Swap";
+            this.SwapBtn.UseVisualStyleBackColor = true;
+            this.SwapBtn.Click += new System.EventHandler(this.SwapBtn_Click);
             // 
-            // baseCpyBtn
+            // BaseCopyBtn
             // 
-            this.baseCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baseCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.baseCpyBtn.Location = new System.Drawing.Point(565, 10);
-            this.baseCpyBtn.Name = "baseCpyBtn";
-            this.baseCpyBtn.Size = new System.Drawing.Size(25, 25);
-            this.baseCpyBtn.TabIndex = 6;
-            this.baseCpyBtn.Text = "C";
-            this.baseCpyBtn.UseVisualStyleBackColor = true;
-            this.baseCpyBtn.Click += new System.EventHandler(this.BaseCpyBtn_Click);
+            this.BaseCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BaseCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.BaseCopyBtn.Location = new System.Drawing.Point(473, 18);
+            this.BaseCopyBtn.Name = "BaseCopyBtn";
+            this.BaseCopyBtn.Size = new System.Drawing.Size(25, 25);
+            this.BaseCopyBtn.TabIndex = 6;
+            this.BaseCopyBtn.Text = "C";
+            this.BaseCopyBtn.UseVisualStyleBackColor = true;
+            this.BaseCopyBtn.Click += new System.EventHandler(this.BaseCopyBtn_Click);
             // 
-            // basePstBtn
+            // BasePasteBtn
             // 
-            this.basePstBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.basePstBtn.ForeColor = System.Drawing.Color.Black;
-            this.basePstBtn.Location = new System.Drawing.Point(595, 10);
-            this.basePstBtn.Name = "basePstBtn";
-            this.basePstBtn.Size = new System.Drawing.Size(25, 25);
-            this.basePstBtn.TabIndex = 7;
-            this.basePstBtn.Text = "P";
-            this.basePstBtn.UseVisualStyleBackColor = true;
-            this.basePstBtn.Click += new System.EventHandler(this.BasePstBtn_Click);
+            this.BasePasteBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BasePasteBtn.ForeColor = System.Drawing.Color.Black;
+            this.BasePasteBtn.Location = new System.Drawing.Point(503, 18);
+            this.BasePasteBtn.Name = "BasePasteBtn";
+            this.BasePasteBtn.Size = new System.Drawing.Size(25, 25);
+            this.BasePasteBtn.TabIndex = 7;
+            this.BasePasteBtn.Text = "P";
+            this.BasePasteBtn.UseVisualStyleBackColor = true;
+            this.BasePasteBtn.Click += new System.EventHandler(this.BasePasteBtn_Click);
             // 
-            // comparePstBtn
+            // ComparePasteBtn
             // 
-            this.comparePstBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comparePstBtn.ForeColor = System.Drawing.Color.Black;
-            this.comparePstBtn.Location = new System.Drawing.Point(595, 40);
-            this.comparePstBtn.Name = "comparePstBtn";
-            this.comparePstBtn.Size = new System.Drawing.Size(25, 25);
-            this.comparePstBtn.TabIndex = 9;
-            this.comparePstBtn.Text = "P";
-            this.comparePstBtn.UseVisualStyleBackColor = true;
-            this.comparePstBtn.Click += new System.EventHandler(this.ComparePstBtn_Click);
+            this.ComparePasteBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComparePasteBtn.ForeColor = System.Drawing.Color.Black;
+            this.ComparePasteBtn.Location = new System.Drawing.Point(503, 49);
+            this.ComparePasteBtn.Name = "ComparePasteBtn";
+            this.ComparePasteBtn.Size = new System.Drawing.Size(25, 25);
+            this.ComparePasteBtn.TabIndex = 9;
+            this.ComparePasteBtn.Text = "P";
+            this.ComparePasteBtn.UseVisualStyleBackColor = true;
+            this.ComparePasteBtn.Click += new System.EventHandler(this.ComparePasteBtn_Click);
             // 
-            // compareCpyBtn
+            // CompareCopyBtn
             // 
-            this.compareCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.compareCpyBtn.Location = new System.Drawing.Point(565, 40);
-            this.compareCpyBtn.Name = "compareCpyBtn";
-            this.compareCpyBtn.Size = new System.Drawing.Size(25, 25);
-            this.compareCpyBtn.TabIndex = 8;
-            this.compareCpyBtn.Text = "C";
-            this.compareCpyBtn.UseVisualStyleBackColor = true;
-            this.compareCpyBtn.Click += new System.EventHandler(this.CompareCpyBtn_Click);
+            this.CompareCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompareCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.CompareCopyBtn.Location = new System.Drawing.Point(473, 49);
+            this.CompareCopyBtn.Name = "CompareCopyBtn";
+            this.CompareCopyBtn.Size = new System.Drawing.Size(25, 25);
+            this.CompareCopyBtn.TabIndex = 8;
+            this.CompareCopyBtn.Text = "C";
+            this.CompareCopyBtn.UseVisualStyleBackColor = true;
+            this.CompareCopyBtn.Click += new System.EventHandler(this.CompareCopyBtn_Click);
             // 
-            // differenceBx
+            // StatusLbl
             // 
-            this.differenceBx.BackColor = System.Drawing.Color.White;
-            this.differenceBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.differenceBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.differenceBx.ForeColor = System.Drawing.Color.Black;
-            this.differenceBx.Location = new System.Drawing.Point(140, 100);
-            this.differenceBx.Name = "differenceBx";
-            this.differenceBx.Size = new System.Drawing.Size(420, 25);
-            this.differenceBx.TabIndex = 11;
+            this.StatusLbl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusLbl.ForeColor = System.Drawing.Color.Blue;
+            this.StatusLbl.Location = new System.Drawing.Point(117, 173);
+            this.StatusLbl.Name = "StatusLbl";
+            this.StatusLbl.Size = new System.Drawing.Size(411, 25);
+            this.StatusLbl.TabIndex = 22;
+            this.StatusLbl.Text = "Awaiting input...";
+            this.StatusLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // differenceLbl
+            // BaseBox
             // 
-            this.differenceLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.differenceLbl.ForeColor = System.Drawing.Color.Black;
-            this.differenceLbl.Location = new System.Drawing.Point(10, 100);
-            this.differenceLbl.Name = "differenceLbl";
-            this.differenceLbl.Size = new System.Drawing.Size(125, 25);
-            this.differenceLbl.TabIndex = 12;
-            this.differenceLbl.Text = "Difference:";
-            this.differenceLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BaseBox.BackColor = System.Drawing.Color.White;
+            this.BaseBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BaseBox.ForeColor = System.Drawing.Color.Black;
+            this.BaseBox.FormattingEnabled = true;
+            this.BaseBox.Location = new System.Drawing.Point(117, 18);
+            this.BaseBox.Name = "BaseBox";
+            this.BaseBox.Size = new System.Drawing.Size(350, 25);
+            this.BaseBox.TabIndex = 31;
             // 
-            // differenceCpyBtn
+            // groupBox1
             // 
-            this.differenceCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.differenceCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.differenceCpyBtn.Location = new System.Drawing.Point(565, 100);
-            this.differenceCpyBtn.Name = "differenceCpyBtn";
-            this.differenceCpyBtn.Size = new System.Drawing.Size(55, 25);
-            this.differenceCpyBtn.TabIndex = 13;
-            this.differenceCpyBtn.Text = "Copy";
-            this.differenceCpyBtn.UseVisualStyleBackColor = true;
-            this.differenceCpyBtn.Click += new System.EventHandler(this.DifferenceCpyBtn_Click);
+            this.groupBox1.Controls.Add(this.ResetBtn);
+            this.groupBox1.Controls.Add(this.BaseLbl);
+            this.groupBox1.Controls.Add(this.CompareLbl);
+            this.groupBox1.Controls.Add(this.CompareBox);
+            this.groupBox1.Controls.Add(this.CompareBtn);
+            this.groupBox1.Controls.Add(this.SwapBtn);
+            this.groupBox1.Controls.Add(this.BaseBox);
+            this.groupBox1.Controls.Add(this.BaseCopyBtn);
+            this.groupBox1.Controls.Add(this.BasePasteBtn);
+            this.groupBox1.Controls.Add(this.CompareCopyBtn);
+            this.groupBox1.Controls.Add(this.ComparePasteBtn);
+            this.groupBox1.Location = new System.Drawing.Point(12, 133);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(535, 112);
+            this.groupBox1.TabIndex = 37;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Input";
             // 
-            // halfMaskCpyBtn
+            // groupBox2
             // 
-            this.halfMaskCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.halfMaskCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.halfMaskCpyBtn.Location = new System.Drawing.Point(565, 130);
-            this.halfMaskCpyBtn.Name = "halfMaskCpyBtn";
-            this.halfMaskCpyBtn.Size = new System.Drawing.Size(55, 25);
-            this.halfMaskCpyBtn.TabIndex = 16;
-            this.halfMaskCpyBtn.Text = "Copy";
-            this.halfMaskCpyBtn.UseVisualStyleBackColor = true;
-            this.halfMaskCpyBtn.Click += new System.EventHandler(this.HalfMaskCpyBtn_Click);
+            this.groupBox2.Controls.Add(this.MaskCopyBtn);
+            this.groupBox2.Controls.Add(this.ByteArrayCopyBtn);
+            this.groupBox2.Controls.Add(this.HexEcapedCopyBtn);
+            this.groupBox2.Controls.Add(this.HexCopyBtn);
+            this.groupBox2.Controls.Add(this.DifferenceCopyBtn);
+            this.groupBox2.Controls.Add(this.ByteArrayBox);
+            this.groupBox2.Controls.Add(this.ByteArrayLbl);
+            this.groupBox2.Controls.Add(this.HexEscapedBox);
+            this.groupBox2.Controls.Add(this.HexEscapedLbl);
+            this.groupBox2.Controls.Add(this.HexBox);
+            this.groupBox2.Controls.Add(this.HexLbl);
+            this.groupBox2.Controls.Add(this.MaskBox);
+            this.groupBox2.Controls.Add(this.MaskLbl);
+            this.groupBox2.Controls.Add(this.DifferenceBox);
+            this.groupBox2.Controls.Add(this.StatusLbl);
+            this.groupBox2.Controls.Add(this.DifferenceLbl);
+            this.groupBox2.Location = new System.Drawing.Point(12, 251);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(535, 205);
+            this.groupBox2.TabIndex = 40;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Output";
             // 
-            // halfMaskLbl
+            // ResetBtn
             // 
-            this.halfMaskLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.halfMaskLbl.ForeColor = System.Drawing.Color.Black;
-            this.halfMaskLbl.Location = new System.Drawing.Point(10, 130);
-            this.halfMaskLbl.Name = "halfMaskLbl";
-            this.halfMaskLbl.Size = new System.Drawing.Size(125, 25);
-            this.halfMaskLbl.TabIndex = 15;
-            this.halfMaskLbl.Text = "Half Byte Mask:";
-            this.halfMaskLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ResetBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResetBtn.ForeColor = System.Drawing.Color.Black;
+            this.ResetBtn.Location = new System.Drawing.Point(473, 79);
+            this.ResetBtn.Name = "ResetBtn";
+            this.ResetBtn.Size = new System.Drawing.Size(55, 25);
+            this.ResetBtn.TabIndex = 54;
+            this.ResetBtn.Text = "Reset";
+            this.ResetBtn.UseVisualStyleBackColor = true;
+            this.ResetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
-            // halfMaskBx
+            // MaskCopyBtn
             // 
-            this.halfMaskBx.BackColor = System.Drawing.Color.White;
-            this.halfMaskBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.halfMaskBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.halfMaskBx.ForeColor = System.Drawing.Color.Black;
-            this.halfMaskBx.Location = new System.Drawing.Point(140, 130);
-            this.halfMaskBx.Name = "halfMaskBx";
-            this.halfMaskBx.ReadOnly = true;
-            this.halfMaskBx.Size = new System.Drawing.Size(420, 25);
-            this.halfMaskBx.TabIndex = 14;
+            this.MaskCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaskCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.MaskCopyBtn.Location = new System.Drawing.Point(473, 142);
+            this.MaskCopyBtn.Name = "MaskCopyBtn";
+            this.MaskCopyBtn.Size = new System.Drawing.Size(55, 25);
+            this.MaskCopyBtn.TabIndex = 53;
+            this.MaskCopyBtn.Text = "Copy";
+            this.MaskCopyBtn.UseVisualStyleBackColor = true;
+            this.MaskCopyBtn.Click += new System.EventHandler(this.MaskCopyBtn_Click);
             // 
-            // codeCpyBtn
+            // ByteArrayCopyBtn
             // 
-            this.codeCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.codeCpyBtn.Location = new System.Drawing.Point(565, 190);
-            this.codeCpyBtn.Name = "codeCpyBtn";
-            this.codeCpyBtn.Size = new System.Drawing.Size(55, 25);
-            this.codeCpyBtn.TabIndex = 19;
-            this.codeCpyBtn.Text = "Copy";
-            this.codeCpyBtn.UseVisualStyleBackColor = true;
-            this.codeCpyBtn.Click += new System.EventHandler(this.CodeCpyBtn_Click);
+            this.ByteArrayCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ByteArrayCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.ByteArrayCopyBtn.Location = new System.Drawing.Point(473, 111);
+            this.ByteArrayCopyBtn.Name = "ByteArrayCopyBtn";
+            this.ByteArrayCopyBtn.Size = new System.Drawing.Size(55, 25);
+            this.ByteArrayCopyBtn.TabIndex = 52;
+            this.ByteArrayCopyBtn.Text = "Copy";
+            this.ByteArrayCopyBtn.UseVisualStyleBackColor = true;
+            this.ByteArrayCopyBtn.Click += new System.EventHandler(this.ByteArrayCopyBtn_Click);
             // 
-            // codeLbl
+            // HexEcapedCopyBtn
             // 
-            this.codeLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeLbl.ForeColor = System.Drawing.Color.Black;
-            this.codeLbl.Location = new System.Drawing.Point(10, 190);
-            this.codeLbl.Name = "codeLbl";
-            this.codeLbl.Size = new System.Drawing.Size(125, 25);
-            this.codeLbl.TabIndex = 18;
-            this.codeLbl.Text = "Code Style:";
-            this.codeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.HexEcapedCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexEcapedCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.HexEcapedCopyBtn.Location = new System.Drawing.Point(473, 80);
+            this.HexEcapedCopyBtn.Name = "HexEcapedCopyBtn";
+            this.HexEcapedCopyBtn.Size = new System.Drawing.Size(55, 25);
+            this.HexEcapedCopyBtn.TabIndex = 51;
+            this.HexEcapedCopyBtn.Text = "Copy";
+            this.HexEcapedCopyBtn.UseVisualStyleBackColor = true;
+            this.HexEcapedCopyBtn.Click += new System.EventHandler(this.HexEcapedCopyBtn_Click);
             // 
-            // codeBx
+            // HexCopyBtn
             // 
-            this.codeBx.BackColor = System.Drawing.Color.White;
-            this.codeBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.codeBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeBx.ForeColor = System.Drawing.Color.Black;
-            this.codeBx.Location = new System.Drawing.Point(140, 190);
-            this.codeBx.Name = "codeBx";
-            this.codeBx.ReadOnly = true;
-            this.codeBx.Size = new System.Drawing.Size(420, 25);
-            this.codeBx.TabIndex = 17;
+            this.HexCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.HexCopyBtn.Location = new System.Drawing.Point(473, 49);
+            this.HexCopyBtn.Name = "HexCopyBtn";
+            this.HexCopyBtn.Size = new System.Drawing.Size(55, 25);
+            this.HexCopyBtn.TabIndex = 50;
+            this.HexCopyBtn.Text = "Copy";
+            this.HexCopyBtn.UseVisualStyleBackColor = true;
+            this.HexCopyBtn.Click += new System.EventHandler(this.HexCopyBtn_Click);
             // 
-            // statusLbl
+            // DifferenceCopyBtn
             // 
-            this.statusLbl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLbl.ForeColor = System.Drawing.Color.Blue;
-            this.statusLbl.Location = new System.Drawing.Point(140, 250);
-            this.statusLbl.Name = "statusLbl";
-            this.statusLbl.Size = new System.Drawing.Size(480, 25);
-            this.statusLbl.TabIndex = 22;
-            this.statusLbl.Text = "Awaiting input...";
-            this.statusLbl.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.DifferenceCopyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DifferenceCopyBtn.ForeColor = System.Drawing.Color.Black;
+            this.DifferenceCopyBtn.Location = new System.Drawing.Point(473, 18);
+            this.DifferenceCopyBtn.Name = "DifferenceCopyBtn";
+            this.DifferenceCopyBtn.Size = new System.Drawing.Size(55, 25);
+            this.DifferenceCopyBtn.TabIndex = 49;
+            this.DifferenceCopyBtn.Text = "Copy";
+            this.DifferenceCopyBtn.UseVisualStyleBackColor = true;
+            this.DifferenceCopyBtn.Click += new System.EventHandler(this.DifferenceCopyBtn_Click);
             // 
-            // arrayCpyBtn
+            // ByteArrayBox
             // 
-            this.arrayCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arrayCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.arrayCpyBtn.Location = new System.Drawing.Point(565, 220);
-            this.arrayCpyBtn.Name = "arrayCpyBtn";
-            this.arrayCpyBtn.Size = new System.Drawing.Size(55, 25);
-            this.arrayCpyBtn.TabIndex = 25;
-            this.arrayCpyBtn.Text = "Copy";
-            this.arrayCpyBtn.UseVisualStyleBackColor = true;
-            this.arrayCpyBtn.Click += new System.EventHandler(this.ArrayCpyBtn_Click);
+            this.ByteArrayBox.BackColor = System.Drawing.Color.White;
+            this.ByteArrayBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ByteArrayBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ByteArrayBox.ForeColor = System.Drawing.Color.Black;
+            this.ByteArrayBox.Location = new System.Drawing.Point(117, 111);
+            this.ByteArrayBox.Name = "ByteArrayBox";
+            this.ByteArrayBox.ReadOnly = true;
+            this.ByteArrayBox.Size = new System.Drawing.Size(350, 25);
+            this.ByteArrayBox.TabIndex = 48;
             // 
-            // arrayLbl
+            // ByteArrayLbl
             // 
-            this.arrayLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arrayLbl.ForeColor = System.Drawing.Color.Black;
-            this.arrayLbl.Location = new System.Drawing.Point(10, 220);
-            this.arrayLbl.Name = "arrayLbl";
-            this.arrayLbl.Size = new System.Drawing.Size(125, 25);
-            this.arrayLbl.TabIndex = 24;
-            this.arrayLbl.Text = "Array Style:";
-            this.arrayLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ByteArrayLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ByteArrayLbl.ForeColor = System.Drawing.Color.Black;
+            this.ByteArrayLbl.Location = new System.Drawing.Point(6, 111);
+            this.ByteArrayLbl.Name = "ByteArrayLbl";
+            this.ByteArrayLbl.Size = new System.Drawing.Size(105, 25);
+            this.ByteArrayLbl.TabIndex = 47;
+            this.ByteArrayLbl.Text = "Byte Array:";
+            this.ByteArrayLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // arrayBx
+            // HexEscapedBox
             // 
-            this.arrayBx.BackColor = System.Drawing.Color.White;
-            this.arrayBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.arrayBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arrayBx.ForeColor = System.Drawing.Color.Black;
-            this.arrayBx.Location = new System.Drawing.Point(140, 220);
-            this.arrayBx.Name = "arrayBx";
-            this.arrayBx.ReadOnly = true;
-            this.arrayBx.Size = new System.Drawing.Size(420, 25);
-            this.arrayBx.TabIndex = 23;
+            this.HexEscapedBox.BackColor = System.Drawing.Color.White;
+            this.HexEscapedBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HexEscapedBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexEscapedBox.ForeColor = System.Drawing.Color.Black;
+            this.HexEscapedBox.Location = new System.Drawing.Point(117, 80);
+            this.HexEscapedBox.Name = "HexEscapedBox";
+            this.HexEscapedBox.ReadOnly = true;
+            this.HexEscapedBox.Size = new System.Drawing.Size(350, 25);
+            this.HexEscapedBox.TabIndex = 46;
             // 
-            // creditsLbl
+            // HexEscapedLbl
             // 
-            this.creditsLbl.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.creditsLbl.ForeColor = System.Drawing.Color.Black;
-            this.creditsLbl.Location = new System.Drawing.Point(10, 250);
-            this.creditsLbl.Name = "creditsLbl";
-            this.creditsLbl.Size = new System.Drawing.Size(125, 25);
-            this.creditsLbl.TabIndex = 26;
-            this.creditsLbl.Text = "@ItsBranK";
-            this.creditsLbl.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.HexEscapedLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexEscapedLbl.ForeColor = System.Drawing.Color.Black;
+            this.HexEscapedLbl.Location = new System.Drawing.Point(6, 80);
+            this.HexEscapedLbl.Name = "HexEscapedLbl";
+            this.HexEscapedLbl.Size = new System.Drawing.Size(105, 25);
+            this.HexEscapedLbl.TabIndex = 45;
+            this.HexEscapedLbl.Text = "Hex Escaped:";
+            this.HexEscapedLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // swapBtn
+            // HexBox
             // 
-            this.swapBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swapBtn.ForeColor = System.Drawing.Color.Black;
-            this.swapBtn.Location = new System.Drawing.Point(565, 70);
-            this.swapBtn.Name = "swapBtn";
-            this.swapBtn.Size = new System.Drawing.Size(55, 25);
-            this.swapBtn.TabIndex = 27;
-            this.swapBtn.Text = "Swap";
-            this.swapBtn.UseVisualStyleBackColor = true;
-            this.swapBtn.Click += new System.EventHandler(this.SwapBtn_Click);
+            this.HexBox.BackColor = System.Drawing.Color.White;
+            this.HexBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HexBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexBox.ForeColor = System.Drawing.Color.Black;
+            this.HexBox.Location = new System.Drawing.Point(117, 49);
+            this.HexBox.Name = "HexBox";
+            this.HexBox.ReadOnly = true;
+            this.HexBox.Size = new System.Drawing.Size(350, 25);
+            this.HexBox.TabIndex = 44;
             // 
-            // fullMaskCpyBtn
+            // HexLbl
             // 
-            this.fullMaskCpyBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullMaskCpyBtn.ForeColor = System.Drawing.Color.Black;
-            this.fullMaskCpyBtn.Location = new System.Drawing.Point(565, 160);
-            this.fullMaskCpyBtn.Name = "fullMaskCpyBtn";
-            this.fullMaskCpyBtn.Size = new System.Drawing.Size(55, 25);
-            this.fullMaskCpyBtn.TabIndex = 30;
-            this.fullMaskCpyBtn.Text = "Copy";
-            this.fullMaskCpyBtn.UseVisualStyleBackColor = true;
-            this.fullMaskCpyBtn.Click += new System.EventHandler(this.FullMaskCpyBtn_Click);
+            this.HexLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexLbl.ForeColor = System.Drawing.Color.Black;
+            this.HexLbl.Location = new System.Drawing.Point(6, 49);
+            this.HexLbl.Name = "HexLbl";
+            this.HexLbl.Size = new System.Drawing.Size(105, 25);
+            this.HexLbl.TabIndex = 43;
+            this.HexLbl.Text = "Hex:";
+            this.HexLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // fullMaskLbl
+            // MaskBox
             // 
-            this.fullMaskLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullMaskLbl.ForeColor = System.Drawing.Color.Black;
-            this.fullMaskLbl.Location = new System.Drawing.Point(10, 160);
-            this.fullMaskLbl.Name = "fullMaskLbl";
-            this.fullMaskLbl.Size = new System.Drawing.Size(125, 25);
-            this.fullMaskLbl.TabIndex = 29;
-            this.fullMaskLbl.Text = "Full Byte Mask:";
-            this.fullMaskLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MaskBox.BackColor = System.Drawing.Color.White;
+            this.MaskBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MaskBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaskBox.ForeColor = System.Drawing.Color.Black;
+            this.MaskBox.Location = new System.Drawing.Point(117, 142);
+            this.MaskBox.Name = "MaskBox";
+            this.MaskBox.ReadOnly = true;
+            this.MaskBox.Size = new System.Drawing.Size(350, 25);
+            this.MaskBox.TabIndex = 42;
             // 
-            // fullMaskBx
+            // MaskLbl
             // 
-            this.fullMaskBx.BackColor = System.Drawing.Color.White;
-            this.fullMaskBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fullMaskBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullMaskBx.ForeColor = System.Drawing.Color.Black;
-            this.fullMaskBx.Location = new System.Drawing.Point(140, 160);
-            this.fullMaskBx.Name = "fullMaskBx";
-            this.fullMaskBx.ReadOnly = true;
-            this.fullMaskBx.Size = new System.Drawing.Size(420, 25);
-            this.fullMaskBx.TabIndex = 28;
+            this.MaskLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaskLbl.ForeColor = System.Drawing.Color.Black;
+            this.MaskLbl.Location = new System.Drawing.Point(6, 142);
+            this.MaskLbl.Name = "MaskLbl";
+            this.MaskLbl.Size = new System.Drawing.Size(105, 25);
+            this.MaskLbl.TabIndex = 41;
+            this.MaskLbl.Text = "Mask:";
+            this.MaskLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // baseBx
+            // DifferenceBox
             // 
-            this.baseBx.BackColor = System.Drawing.Color.White;
-            this.baseBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baseBx.ForeColor = System.Drawing.Color.Black;
-            this.baseBx.FormattingEnabled = true;
-            this.baseBx.Location = new System.Drawing.Point(140, 10);
-            this.baseBx.Name = "baseBx";
-            this.baseBx.Size = new System.Drawing.Size(420, 25);
-            this.baseBx.TabIndex = 31;
+            this.DifferenceBox.BackColor = System.Drawing.Color.White;
+            this.DifferenceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DifferenceBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DifferenceBox.ForeColor = System.Drawing.Color.Black;
+            this.DifferenceBox.Location = new System.Drawing.Point(117, 18);
+            this.DifferenceBox.Name = "DifferenceBox";
+            this.DifferenceBox.ReadOnly = true;
+            this.DifferenceBox.Size = new System.Drawing.Size(350, 25);
+            this.DifferenceBox.TabIndex = 40;
             // 
-            // mainFrm
+            // DifferenceLbl
+            // 
+            this.DifferenceLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DifferenceLbl.ForeColor = System.Drawing.Color.Black;
+            this.DifferenceLbl.Location = new System.Drawing.Point(6, 18);
+            this.DifferenceLbl.Name = "DifferenceLbl";
+            this.DifferenceLbl.Size = new System.Drawing.Size(105, 25);
+            this.DifferenceLbl.TabIndex = 0;
+            this.DifferenceLbl.Text = "Difference:";
+            this.DifferenceLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.PIDBox);
+            this.groupBox3.Controls.Add(this.ProcessBox);
+            this.groupBox3.Controls.Add(this.CreateBtn);
+            this.groupBox3.Controls.Add(this.AddressPasteBtn);
+            this.groupBox3.Controls.Add(this.LengthLbl);
+            this.groupBox3.Controls.Add(this.LengthBox);
+            this.groupBox3.Controls.Add(this.RefreshBtn);
+            this.groupBox3.Controls.Add(this.ProcessLbl);
+            this.groupBox3.Controls.Add(this.AddressLbl);
+            this.groupBox3.Controls.Add(this.AddressBox);
+            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(535, 115);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Process (Optional)";
+            // 
+            // ProcessBox
+            // 
+            this.ProcessBox.BackColor = System.Drawing.Color.White;
+            this.ProcessBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ProcessBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessBox.ForeColor = System.Drawing.Color.Black;
+            this.ProcessBox.FormattingEnabled = true;
+            this.ProcessBox.Location = new System.Drawing.Point(117, 18);
+            this.ProcessBox.Name = "ProcessBox";
+            this.ProcessBox.Size = new System.Drawing.Size(214, 23);
+            this.ProcessBox.TabIndex = 40;
+            this.ProcessBox.SelectedValueChanged += new System.EventHandler(this.ProcessBox_SelectedValueChanged);
+            // 
+            // CreateBtn
+            // 
+            this.CreateBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateBtn.ForeColor = System.Drawing.Color.Black;
+            this.CreateBtn.Location = new System.Drawing.Point(418, 79);
+            this.CreateBtn.Name = "CreateBtn";
+            this.CreateBtn.Size = new System.Drawing.Size(110, 25);
+            this.CreateBtn.TabIndex = 51;
+            this.CreateBtn.Text = "Create";
+            this.CreateBtn.UseVisualStyleBackColor = true;
+            this.CreateBtn.Click += new System.EventHandler(this.CreateBtn_Click);
+            // 
+            // AddressPasteBtn
+            // 
+            this.AddressPasteBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddressPasteBtn.ForeColor = System.Drawing.Color.Black;
+            this.AddressPasteBtn.Location = new System.Drawing.Point(418, 48);
+            this.AddressPasteBtn.Name = "AddressPasteBtn";
+            this.AddressPasteBtn.Size = new System.Drawing.Size(110, 25);
+            this.AddressPasteBtn.TabIndex = 50;
+            this.AddressPasteBtn.Text = "Paste";
+            this.AddressPasteBtn.UseVisualStyleBackColor = true;
+            this.AddressPasteBtn.Click += new System.EventHandler(this.AddressPasteBtn_Click);
+            // 
+            // LengthLbl
+            // 
+            this.LengthLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LengthLbl.ForeColor = System.Drawing.Color.Black;
+            this.LengthLbl.Location = new System.Drawing.Point(6, 77);
+            this.LengthLbl.Name = "LengthLbl";
+            this.LengthLbl.Size = new System.Drawing.Size(105, 25);
+            this.LengthLbl.TabIndex = 44;
+            this.LengthLbl.Text = "Byte Length:";
+            this.LengthLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LengthBox
+            // 
+            this.LengthBox.BackColor = System.Drawing.Color.White;
+            this.LengthBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LengthBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LengthBox.ForeColor = System.Drawing.Color.Black;
+            this.LengthBox.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.LengthBox.Location = new System.Drawing.Point(117, 79);
+            this.LengthBox.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.LengthBox.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.LengthBox.Name = "LengthBox";
+            this.LengthBox.Size = new System.Drawing.Size(295, 25);
+            this.LengthBox.TabIndex = 43;
+            this.LengthBox.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshBtn.ForeColor = System.Drawing.Color.Black;
+            this.RefreshBtn.Location = new System.Drawing.Point(418, 17);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(110, 25);
+            this.RefreshBtn.TabIndex = 41;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.UseVisualStyleBackColor = true;
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
+            // 
+            // ProcessLbl
+            // 
+            this.ProcessLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessLbl.ForeColor = System.Drawing.Color.Black;
+            this.ProcessLbl.Location = new System.Drawing.Point(6, 18);
+            this.ProcessLbl.Name = "ProcessLbl";
+            this.ProcessLbl.Size = new System.Drawing.Size(105, 25);
+            this.ProcessLbl.TabIndex = 0;
+            this.ProcessLbl.Text = "Process/PID:";
+            this.ProcessLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // AddressLbl
+            // 
+            this.AddressLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddressLbl.ForeColor = System.Drawing.Color.Black;
+            this.AddressLbl.Location = new System.Drawing.Point(6, 48);
+            this.AddressLbl.Name = "AddressLbl";
+            this.AddressLbl.Size = new System.Drawing.Size(105, 25);
+            this.AddressLbl.TabIndex = 2;
+            this.AddressLbl.Text = "Address:";
+            this.AddressLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // AddressBox
+            // 
+            this.AddressBox.BackColor = System.Drawing.Color.White;
+            this.AddressBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AddressBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddressBox.ForeColor = System.Drawing.Color.Black;
+            this.AddressBox.Location = new System.Drawing.Point(117, 48);
+            this.AddressBox.Name = "AddressBox";
+            this.AddressBox.Size = new System.Drawing.Size(295, 25);
+            this.AddressBox.TabIndex = 3;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(559, 24);
+            this.menuStrip1.TabIndex = 42;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // PIDBox
+            // 
+            this.PIDBox.BackColor = System.Drawing.Color.White;
+            this.PIDBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PIDBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PIDBox.ForeColor = System.Drawing.Color.Black;
+            this.PIDBox.Location = new System.Drawing.Point(337, 17);
+            this.PIDBox.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.PIDBox.Name = "PIDBox";
+            this.PIDBox.Size = new System.Drawing.Size(75, 25);
+            this.PIDBox.TabIndex = 52;
+            this.PIDBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PIDBox_KeyUp);
+            // 
+            // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 285);
-            this.Controls.Add(this.baseBx);
-            this.Controls.Add(this.fullMaskCpyBtn);
-            this.Controls.Add(this.fullMaskLbl);
-            this.Controls.Add(this.fullMaskBx);
-            this.Controls.Add(this.swapBtn);
-            this.Controls.Add(this.creditsLbl);
-            this.Controls.Add(this.arrayCpyBtn);
-            this.Controls.Add(this.arrayLbl);
-            this.Controls.Add(this.arrayBx);
-            this.Controls.Add(this.statusLbl);
-            this.Controls.Add(this.codeCpyBtn);
-            this.Controls.Add(this.codeLbl);
-            this.Controls.Add(this.codeBx);
-            this.Controls.Add(this.halfMaskCpyBtn);
-            this.Controls.Add(this.halfMaskLbl);
-            this.Controls.Add(this.halfMaskBx);
-            this.Controls.Add(this.differenceCpyBtn);
-            this.Controls.Add(this.differenceLbl);
-            this.Controls.Add(this.differenceBx);
-            this.Controls.Add(this.comparePstBtn);
-            this.Controls.Add(this.compareCpyBtn);
-            this.Controls.Add(this.basePstBtn);
-            this.Controls.Add(this.baseCpyBtn);
-            this.Controls.Add(this.resetBtn);
-            this.Controls.Add(this.compareBtn);
-            this.Controls.Add(this.compareBx);
-            this.Controls.Add(this.compareLbl);
-            this.Controls.Add(this.baseLbl);
+            this.ClientSize = new System.Drawing.Size(559, 466);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "mainFrm";
+            this.Name = "MainFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Signature Maker v1.1";
-            this.Load += new System.EventHandler(this.mainFrm_Load);
+            this.Text = "ItsBranK\'s Signature Maker (x64)";
+            this.Load += new System.EventHandler(this.MainFrm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -430,34 +635,47 @@
 
         #endregion
 
-        private System.Windows.Forms.Label baseLbl;
-        private System.Windows.Forms.TextBox compareBx;
-        private System.Windows.Forms.Label compareLbl;
-        private System.Windows.Forms.Button compareBtn;
-        private System.Windows.Forms.Button resetBtn;
-        private System.Windows.Forms.Button baseCpyBtn;
-        private System.Windows.Forms.Button basePstBtn;
-        private System.Windows.Forms.Button comparePstBtn;
-        private System.Windows.Forms.Button compareCpyBtn;
-        private System.Windows.Forms.TextBox differenceBx;
-        private System.Windows.Forms.Label differenceLbl;
-        private System.Windows.Forms.Button differenceCpyBtn;
-        private System.Windows.Forms.Button halfMaskCpyBtn;
-        private System.Windows.Forms.Label halfMaskLbl;
-        private System.Windows.Forms.TextBox halfMaskBx;
-        private System.Windows.Forms.Button codeCpyBtn;
-        private System.Windows.Forms.Label codeLbl;
-        private System.Windows.Forms.TextBox codeBx;
-        private System.Windows.Forms.Label statusLbl;
-        private System.Windows.Forms.Button arrayCpyBtn;
-        private System.Windows.Forms.Label arrayLbl;
-        private System.Windows.Forms.TextBox arrayBx;
-        private System.Windows.Forms.Label creditsLbl;
-        private System.Windows.Forms.Button swapBtn;
-        private System.Windows.Forms.Button fullMaskCpyBtn;
-        private System.Windows.Forms.Label fullMaskLbl;
-        private System.Windows.Forms.TextBox fullMaskBx;
-        private System.Windows.Forms.ComboBox baseBx;
+        private System.Windows.Forms.Label BaseLbl;
+        private System.Windows.Forms.TextBox CompareBox;
+        private System.Windows.Forms.Label CompareLbl;
+        private System.Windows.Forms.Button CompareBtn;
+        private System.Windows.Forms.Button SwapBtn;
+        private System.Windows.Forms.Button BaseCopyBtn;
+        private System.Windows.Forms.Button BasePasteBtn;
+        private System.Windows.Forms.Button ComparePasteBtn;
+        private System.Windows.Forms.Button CompareCopyBtn;
+        private System.Windows.Forms.Label StatusLbl;
+        private System.Windows.Forms.ComboBox BaseBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox ByteArrayBox;
+        private System.Windows.Forms.Label ByteArrayLbl;
+        private System.Windows.Forms.TextBox HexEscapedBox;
+        private System.Windows.Forms.Label HexEscapedLbl;
+        private System.Windows.Forms.TextBox HexBox;
+        private System.Windows.Forms.Label HexLbl;
+        private System.Windows.Forms.TextBox MaskBox;
+        private System.Windows.Forms.Label MaskLbl;
+        private System.Windows.Forms.TextBox DifferenceBox;
+        private System.Windows.Forms.Label DifferenceLbl;
+        private System.Windows.Forms.Button MaskCopyBtn;
+        private System.Windows.Forms.Button ByteArrayCopyBtn;
+        private System.Windows.Forms.Button HexEcapedCopyBtn;
+        private System.Windows.Forms.Button HexCopyBtn;
+        private System.Windows.Forms.Button DifferenceCopyBtn;
+        private System.Windows.Forms.Button ResetBtn;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown LengthBox;
+        private System.Windows.Forms.Button RefreshBtn;
+        private System.Windows.Forms.Label ProcessLbl;
+        private System.Windows.Forms.Label AddressLbl;
+        private System.Windows.Forms.TextBox AddressBox;
+        private System.Windows.Forms.Button AddressPasteBtn;
+        private System.Windows.Forms.Label LengthLbl;
+        private System.Windows.Forms.Button CreateBtn;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ComboBox ProcessBox;
+        private System.Windows.Forms.NumericUpDown PIDBox;
     }
 }
 

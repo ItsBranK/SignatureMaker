@@ -10,7 +10,7 @@ namespace Signature_Maker {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainFrm());
+            Application.Run(new MainFrm());
         }
     }
 }

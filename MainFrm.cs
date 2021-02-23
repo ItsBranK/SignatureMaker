@@ -1,212 +1,484 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
-namespace Signature_Maker {
-    public partial class mainFrm : Form {
-        Color redClr = Color.FromArgb(255, 0, 0);
-        Color greenClr = Color.FromArgb(0, 225, 50);
-        Color blueClr = Color.FromArgb(0, 0, 255);
+namespace Signature_Maker
+{
+    public partial class MainFrm : Form
+    {
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, int size, out IntPtr numberOfBytesRead);
 
-        enum modes {
-            half = 0,
-            full = 1,
-            code = 2,
-            array = 3
+        Color RedColor = Color.FromArgb(255, 0, 0);
+        Color OrangeColor = Color.FromArgb(255, 125, 0);
+        Color BlueColor = Color.FromArgb(0, 0, 255);
+        Color GreenColor = Color.FromArgb(0, 225, 50);
+
+        bool FirstScan = true;
+        string CurrentAddress;
+        string CurrentBaseAOB;
+        string CurrentCompareAOB;
+        string CurrentDifferenceAOB;
+
+        enum OutputModes : UInt32
+        {
+            MODE_HEX = 1,
+            MODE_HEX_ESCAPED = 2,
+            MODE_BYTE_ARRAY = 3,
+            MODE_MASK = 4
         };
 
-        public mainFrm() {
+        public MainFrm()
+        {
             InitializeComponent();
         }
-        private void mainFrm_Load(object sender, EventArgs e) {
 
+        private void MainFrm_Load(object sender, EventArgs e)
+        {
+            LoadProcesses();
         }
 
-        string compareBytes(string baseBytes, string compare) {
+        public byte[] ReadMemory(IntPtr handle, IntPtr address, int size)
+        {
+            IntPtr intPtr;
+            byte[] array = new byte[size];
+
+            if (!ReadProcessMemory(handle, address, array, array.Length, out intPtr))
+            {
+                return null;
+            }
+
+            return array;
+        }
+
+        public void LoadProcesses()
+        {
+            ProcessBox.Items.Clear();
+
+            Process[] processList = Process.GetProcesses();
+
+            foreach (Process process in processList)
+            {
+                ProcessBox.Items.Add(process.ProcessName + " [" + process.Id.ToString() + "]");
+            }
+        }
+
+        Process FindProcess(int pid)
+        {
+            Process[] processList = Process.GetProcesses();
+
+            foreach (Process process in processList)
+            {
+                if (process.Id == pid)
+                {
+                    return process;
+                }
+            }
+
+            return null;
+        }
+
+        string CompareBytes(string inputAOB, string compareAOB)
+        {
             string result = "";
-            char[] baseSplit = baseBytes.ToCharArray();
-            char[] compareSplit = compare.ToCharArray();
-            for (int i = 0; i < baseBytes.Length; i++) {
-                if (i < compare.Length) {
+
+            char[] baseSplit = inputAOB.ToCharArray();
+            char[] compareSplit = compareAOB.ToCharArray();
+
+            for (int i = 0; i < inputAOB.Length; i++)
+            {
+                if (i < compareAOB.Length)
+                {
                     string baseHex = baseSplit[i].ToString();
                     string compareHex = compareSplit[i].ToString();
 
-                    if (baseHex == compareHex) {
+                    if (baseHex == compareHex)
+                    {
                         result += compareHex;
-                    } else {
+                    }
+                    else
+                    {
                         result += "?";
                     }
                 }
             }
 
-            if (baseBytes.Length < compare.Length) {
-                for (int i = baseBytes.Length; i < compare.Length; i++) {
-                    string DifferenceHex = compareSplit[i].ToString();
-                    result += DifferenceHex;
+            if (inputAOB.Length < compareAOB.Length)
+            {
+                for (int i = inputAOB.Length; i < compareAOB.Length; i++)
+                {
+                    string difference = compareSplit[i].ToString();
+                    result += difference;
                 }
-            } else if (baseBytes.Length > compare.Length) {
-                for (int i = compare.Length; i < baseBytes.Length; i++) {
-                    string DifferenceHex = baseBytes[i].ToString();
-                    result += DifferenceHex;
+            }
+            else if (inputAOB.Length > compareAOB.Length)
+            {
+                for (int i = compareAOB.Length; i < inputAOB.Length; i++)
+                {
+                    string difference = inputAOB[i].ToString();
+                    result += difference;
                 }
             }
 
-            if (baseBytes != result) {
-                statusLbl.Text = "Difference detected! It is recommended you repeat multiple times until there is no diffrence!";
-                statusLbl.ForeColor = redClr;
-            } else {
-                statusLbl.Text = "No difference detected! Array of bytes match!";
-                statusLbl.ForeColor = greenClr;
-                return baseBytes;
+            if ((result.Length & 1) == 1)
+            {
+                result = result.Remove(result.Length - 1);
+            }
+
+            if (compareAOB != result)
+            {
+                StatusLbl.Text = "Difference detected, it is recommended you repeat multiple times!";
+                StatusLbl.ForeColor = RedColor;
+            }
+            else
+            {
+                if (FirstScan)
+                {
+                    StatusLbl.Text = "First scan detected, it is recommended you repeat multiple times!";
+                    StatusLbl.ForeColor = OrangeColor;
+                    FirstScan = false;
+                }
+                else
+                {
+                    StatusLbl.Text = "No difference detected, array of bytes match!";
+                    StatusLbl.ForeColor = GreenColor;
+                }
+
+                return compareAOB;
             }
 
             return result;
         }
 
-        string generateMask(string aob, modes mode) {
+        string FixSpacing(bool addSpacing, string inputAOB)
+        {
+            inputAOB = inputAOB.Replace(" ", "");
+
+            if (addSpacing)
+            {
+                string rebuiltAOB = "";
+                char[] aobArray = inputAOB.ToCharArray();
+
+                int index = 0;
+
+                for (int i = 0; i < aobArray.Length; i++)
+                {
+                    rebuiltAOB += aobArray[i].ToString();
+
+                    if (i == aobArray.Length - 1)
+                    {
+                        if ((i + 2) <= aobArray.Length)
+                        {
+                            rebuiltAOB = rebuiltAOB.Insert(i + 2, " ");
+                        }
+                    }
+                    else
+                    {
+                        if (index == 1)
+                        {
+                            rebuiltAOB += " ";
+                            index = 0;
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                    }
+                }
+
+                return rebuiltAOB;
+            }
+
+            return inputAOB;
+        }
+
+        string CreateHex(string inputAOB)
+        {
             string result = "";
-            int addAmount = 0;
+            inputAOB = FixSpacing(true, inputAOB);
 
-            if (mode == modes.full) { // If its a full mask, check every char one by one.
-                addAmount = 1;
-            } else if (mode == modes.half) { // If it's a half mask, skip every third char.
-                addAmount = 3;
+            string[] inplutSplit = inputAOB.Split(' ');
+
+            for (int i = 0; i < inplutSplit.Length; i++)
+            {
+                if (inplutSplit[i].Length < 1
+                    || inplutSplit[i].Contains("?"))
+                {
+                    inplutSplit[i] = "00";
+                }
+
+                result += inplutSplit[i];
             }
 
-            char[] splitBytes = aob.ToCharArray();
-            for (int i = 0; i < splitBytes.Length; i += addAmount) { // Loops through all the char's in the AOB, `i` value gets added based on the `addAmount` we assigned previously
-                if (splitBytes[i].ToString() == " ")
-                    continue;
+            return result;
+        }
 
-                if (mode == modes.half) {
-                    if (splitBytes[i].ToString() != "?" && splitBytes[(i + 1)].ToString() != "?") { // If the current char, and the next char, isn't a question mark add an x.
-                        result += "x";
-                    } else { // If it is a question mark, then add one.
-                        result += "?";
-                    }                
-                } else if (mode == modes.full) { // If it's a question mark, add a question mark. If it's anything other add an x.
-                    if (splitBytes[i].ToString() == "?") {
-                        result += "?";
-                    } else {
-                        result += "x";
+        string CreateByteArray(string inputAOB)
+        {
+            string byteArray = "0x";
+            inputAOB = inputAOB.Replace("?", "0");
+
+            int index = 0;
+
+            for (int i = 0; i < inputAOB.Length; i++)
+            {
+                if (i != inputAOB.Length)
+                {
+                    if (index == 0)
+                    {
+                        index = 1;
+                        byteArray += inputAOB[i].ToString();
                     }
+                    else if (index == 1)
+                    {
+                        index = 0;
+                        byteArray += inputAOB[i].ToString();
+
+                        if (i != (inputAOB.Length - 1) && (i + 2) <= inputAOB.Length)
+                        {
+                            byteArray += ", 0x";
+                        }
+                    }
+                }
+            }
+
+            return byteArray;
+        }
+
+        string CreateMask(string inputAOB)
+        {
+            string result = "";
+
+            char[] splitBytes = inputAOB.ToCharArray();
+
+            for (int i = 0; i < splitBytes.Length; i += 2)
+            {
+                if (splitBytes[i].ToString() != "?"
+                    && (i + 1) < splitBytes.Length
+                    && splitBytes[(i + 1)].ToString() != "?")
+                {
+                    result += "x";
+                }
+                else if ((i + 1) < splitBytes.Length)
+                {
+                    result += "?";
                 }
             }
 
             return result;
         }
 
-        string generateBytes(string AOB, modes Mode) {
-            if (Mode == modes.code) {
-                AOB = AOB.Insert(0, "\\x");
-                AOB = AOB.Replace(" ", "\\x");
-                AOB = AOB.Replace("?", "0");
-                return AOB;
-            } else if (Mode == modes.array) {
-                string Result = "0x";
-                AOB = AOB.Replace("?", "0");
+        private void ProcessBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Regex pidEx = new Regex("\\[(.*?)\\]");
+            string pidMatch = pidEx.Match(ProcessBox.Text).Groups[1].ToString();
+            PIDBox.Value = UInt32.Parse(pidMatch);
+        }
 
-                int Index = 0;
-                for (int i = 0; i < AOB.Length; i++) {
-                    if (AOB[i].ToString() == " ")
-                        continue;
 
-                    if (Index == 0) {
-                        Index = 1;
-                        Result += AOB[i].ToString();
-                    } else if (Index == 1) {
-                        Index = 0;
-                        Result += AOB[i].ToString();
+        private void PIDBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Process foundProcess = FindProcess((int)PIDBox.Value);
 
-                        if (i != (AOB.Length - 1))
-                            Result += ", 0x";
-                    }
+                if (foundProcess != null)
+                {
+                    ProcessBox.Text = foundProcess.ProcessName + " [" + foundProcess.Id.ToString() + "]";
                 }
-
-                return Result;
-            }
-
-            return "(null)";
-        }
-
-        private void BaseCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(baseBx.Text))
-                 Clipboard.SetText(baseBx.Text);
-        }
-
-        private void BasePstBtn_Click(object sender, EventArgs e) {
-            baseBx.Text = Clipboard.GetText();
-        }
-
-        private void CompareCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(compareBx.Text))
-                Clipboard.SetText(compareBx.Text);
-        }
-
-        private void ComparePstBtn_Click(object sender, EventArgs e) {
-            compareBx.Text = Clipboard.GetText();
-        }
-
-        private void DifferenceCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(differenceBx.Text))
-                Clipboard.SetText(differenceBx.Text);
-        }
-
-        private void HalfMaskCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(halfMaskBx.Text))
-                Clipboard.SetText(halfMaskBx.Text);
-        }
-
-        private void FullMaskCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(fullMaskBx.Text))
-                Clipboard.SetText(fullMaskBx.Text);
-        }
-
-        private void CodeCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(codeBx.Text))
-                Clipboard.SetText(codeBx.Text);
-        }
-
-        private void ArrayCpyBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(arrayBx.Text))
-                Clipboard.SetText(arrayBx.Text);
-        }
-
-        private void CompareBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(baseBx.Text) && !string.IsNullOrEmpty(compareBx.Text)) {
-                differenceBx.Text = compareBytes(baseBx.Text, compareBx.Text);
-                halfMaskBx.Text = generateMask(differenceBx.Text, modes.half);
-                fullMaskBx.Text = generateMask(differenceBx.Text, modes.full);
-                codeBx.Text = generateBytes(differenceBx.Text, modes.code);
-                arrayBx.Text = generateBytes(differenceBx.Text, modes.array);
             }
         }
 
-        private void ResetBtn_Click(object sender, EventArgs e) {
-            if (!string.IsNullOrEmpty(baseBx.Text))
-                baseBx.Items.Add(baseBx.Text);
-
-            if (!string.IsNullOrEmpty(compareBx.Text))
-                baseBx.Items.Add(compareBx.Text);
-
-            baseBx.Text = "";
-            compareBx.Clear();
-            differenceBx.Clear();
-            halfMaskBx.Clear();
-            fullMaskBx.Clear();
-            codeBx.Clear();
-            arrayBx.Clear();
-
-            statusLbl.Text = "Awaiting input...";
-            statusLbl.ForeColor = blueClr;
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            LoadProcesses();
         }
 
-        private void SwapBtn_Click(object sender, EventArgs e) {
-            if (baseBx.Text != "")
-                baseBx.Items.Add(baseBx.Text);
+        private void AddressPasteBtn_Click(object sender, EventArgs e)
+        {
+            AddressBox.Text = Clipboard.GetText();
+        }
 
-            baseBx.Text = compareBx.Text;
-            compareBx.Clear();
+        private void CreateBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(AddressBox.Text))
+            {
+                Process process = FindProcess((int)PIDBox.Value);
+
+                CurrentAddress = AddressBox.Text.Replace("0x", "");
+
+                if (process != null)
+                {
+                    Int64 addressDecimal = Int64.Parse(CurrentAddress, NumberStyles.HexNumber);
+                    IntPtr addressPointer = (IntPtr)addressDecimal;
+
+                    byte[] foundBytes = ReadMemory(process.Handle, addressPointer, (int)LengthBox.Value);
+
+                    CurrentBaseAOB = BitConverter.ToString(foundBytes).Replace("-", "");
+
+                    if (!string.IsNullOrEmpty(BaseBox.Text))
+                    {
+                        if (!string.IsNullOrEmpty(CompareBox.Text)
+                            && !BaseBox.Items.Contains(CompareBox.Text))
+                        {
+                            BaseBox.Items.Add(CompareBox.Text);
+                        }
+
+                        CompareBox.Text = BaseBox.Text;
+                        CurrentCompareAOB = CompareBox.Text;
+                    }
+                    else
+                    {
+                        CompareBox.Text = FixSpacing(true, CurrentBaseAOB);
+                    }
+
+                    BaseBox.Text = FixSpacing(true, CurrentBaseAOB);
+                }
+                else
+                {
+                    StatusLbl.Text = "Failed to find selected process, PID invalid!";
+                }
+            }
+        }
+
+        private void BaseCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(BaseBox.Text))
+            {
+                Clipboard.SetText(BaseBox.Text);
+            }
+        }
+
+        private void BasePasteBtn_Click(object sender, EventArgs e)
+        {
+            BaseBox.Text = Clipboard.GetText();
+        }
+
+        private void CompareCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(CompareBox.Text))
+            {
+                Clipboard.SetText(CompareBox.Text);
+            }
+        }
+
+        private void ComparePasteBtn_Click(object sender, EventArgs e)
+        {
+            CompareBox.Text = Clipboard.GetText();
+        }
+
+        private void CompareBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(BaseBox.Text) && !string.IsNullOrEmpty(CompareBox.Text))
+            {
+                CurrentBaseAOB = FixSpacing(false, BaseBox.Text);
+                CurrentCompareAOB = FixSpacing(false, CompareBox.Text);
+                CurrentDifferenceAOB = CompareBytes(CurrentBaseAOB, CurrentCompareAOB);
+                DifferenceBox.Text = FixSpacing(true, CurrentDifferenceAOB);
+
+                HexBox.Text = FixSpacing(true, CreateHex(CurrentDifferenceAOB));
+
+                HexEscapedBox.Text = "\\x" + HexBox.Text;
+                HexEscapedBox.Text = HexEscapedBox.Text.Replace(" ", "\\x");
+
+                ByteArrayBox.Text = CreateByteArray(CurrentDifferenceAOB);
+
+                MaskBox.Text = CreateMask(CurrentDifferenceAOB);
+            }
+            else
+            {
+                StatusLbl.Text = "Input fields are empty!";
+                StatusLbl.ForeColor = RedColor;
+            }
+        }
+
+        private void SwapBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(BaseBox.Text))
+            {
+                if (!BaseBox.Items.Contains(BaseBox.Text))
+                {
+                    BaseBox.Items.Add(BaseBox.Text);
+                }
+            }
+
+            BaseBox.Text = CompareBox.Text;
+            CompareBox.Clear();
+        }
+
+        private void DifferenceCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(DifferenceBox.Text))
+            {
+                Clipboard.SetText(DifferenceBox.Text);
+            }
+        }
+
+        private void HexCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(HexBox.Text))
+            {
+                Clipboard.SetText(HexBox.Text);
+            }
+        }
+
+        private void HexEcapedCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(HexEscapedBox.Text))
+            {
+                Clipboard.SetText(HexEscapedBox.Text);
+            }
+        }
+
+        private void ByteArrayCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ByteArrayBox.Text))
+            {
+                Clipboard.SetText(ByteArrayBox.Text);
+            }
+        }
+
+        private void MaskCopyBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(MaskBox.Text))
+            {
+                Clipboard.SetText(MaskBox.Text);
+            }
+        }
+
+        private void ResetBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(BaseBox.Text))
+            {
+                if (!BaseBox.Items.Contains(BaseBox.Text))
+                {
+                    BaseBox.Items.Add(BaseBox.Text);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(CompareBox.Text))
+            {
+                if (!BaseBox.Items.Contains(BaseBox.Text))
+                {
+                    BaseBox.Items.Add(CompareBox.Text);
+                }
+            }
+
+            BaseBox.SelectedText = "";
+            CompareBox.Clear();
+            DifferenceBox.Clear();
+            HexBox.Clear();
+            HexEscapedBox.Clear();
+            ByteArrayBox.Clear();
+            MaskBox.Clear();
+
+            StatusLbl.Text = "Awaiting input...";
+            StatusLbl.ForeColor = BlueColor;
+            FirstScan = true;
         }
     }
 }
