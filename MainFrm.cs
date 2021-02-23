@@ -389,7 +389,7 @@ namespace Signature_Maker
 
                 ByteArrayBox.Text = CreateByteArray(CurrentHex);
 
-                MaskBox.Text = CreateMask(CurrentHex);
+                MaskBox.Text = CreateMask(CurrentDifferenceAOB);
             }
             else
             {
