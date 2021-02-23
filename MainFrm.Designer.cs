@@ -40,8 +40,8 @@
             this.StatusLbl = new System.Windows.Forms.Label();
             this.BaseBox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ResetBtn = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MaskCopyBtn = new System.Windows.Forms.Button();
             this.ByteArrayCopyBtn = new System.Windows.Forms.Button();
             this.HexEcapedCopyBtn = new System.Windows.Forms.Button();
@@ -58,6 +58,7 @@
             this.DifferenceBox = new System.Windows.Forms.TextBox();
             this.DifferenceLbl = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.PIDBox = new System.Windows.Forms.NumericUpDown();
             this.ProcessBox = new System.Windows.Forms.ComboBox();
             this.CreateBtn = new System.Windows.Forms.Button();
             this.AddressPasteBtn = new System.Windows.Forms.Button();
@@ -68,12 +69,11 @@
             this.AddressLbl = new System.Windows.Forms.Label();
             this.AddressBox = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.PIDBox = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).BeginInit();
             this.SuspendLayout();
             // 
             // BaseLbl
@@ -223,6 +223,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Input";
             // 
+            // ResetBtn
+            // 
+            this.ResetBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResetBtn.ForeColor = System.Drawing.Color.Black;
+            this.ResetBtn.Location = new System.Drawing.Point(473, 79);
+            this.ResetBtn.Name = "ResetBtn";
+            this.ResetBtn.Size = new System.Drawing.Size(55, 25);
+            this.ResetBtn.TabIndex = 54;
+            this.ResetBtn.Text = "Reset";
+            this.ResetBtn.UseVisualStyleBackColor = true;
+            this.ResetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.MaskCopyBtn);
@@ -247,18 +259,6 @@
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
-            // 
-            // ResetBtn
-            // 
-            this.ResetBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResetBtn.ForeColor = System.Drawing.Color.Black;
-            this.ResetBtn.Location = new System.Drawing.Point(473, 79);
-            this.ResetBtn.Name = "ResetBtn";
-            this.ResetBtn.Size = new System.Drawing.Size(55, 25);
-            this.ResetBtn.TabIndex = 54;
-            this.ResetBtn.Text = "Reset";
-            this.ResetBtn.UseVisualStyleBackColor = true;
-            this.ResetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
             // MaskCopyBtn
             // 
@@ -454,6 +454,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Process (Optional)";
             // 
+            // PIDBox
+            // 
+            this.PIDBox.BackColor = System.Drawing.Color.White;
+            this.PIDBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PIDBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PIDBox.ForeColor = System.Drawing.Color.Black;
+            this.PIDBox.Location = new System.Drawing.Point(337, 17);
+            this.PIDBox.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.PIDBox.Name = "PIDBox";
+            this.PIDBox.Size = new System.Drawing.Size(75, 25);
+            this.PIDBox.TabIndex = 52;
+            this.PIDBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PIDBox_KeyUp);
+            // 
             // ProcessBox
             // 
             this.ProcessBox.BackColor = System.Drawing.Color.White;
@@ -586,23 +603,6 @@
             this.menuStrip1.TabIndex = 42;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // PIDBox
-            // 
-            this.PIDBox.BackColor = System.Drawing.Color.White;
-            this.PIDBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PIDBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PIDBox.ForeColor = System.Drawing.Color.Black;
-            this.PIDBox.Location = new System.Drawing.Point(337, 17);
-            this.PIDBox.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.PIDBox.Name = "PIDBox";
-            this.PIDBox.Size = new System.Drawing.Size(75, 25);
-            this.PIDBox.TabIndex = 52;
-            this.PIDBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PIDBox_KeyUp);
-            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -626,8 +626,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PIDBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LengthBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

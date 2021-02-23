@@ -23,6 +23,7 @@ namespace Signature_Maker
         string CurrentBaseAOB;
         string CurrentCompareAOB;
         string CurrentDifferenceAOB;
+        string CurrentHex;
 
         enum OutputModes : UInt32
         {
@@ -379,15 +380,16 @@ namespace Signature_Maker
                 CurrentCompareAOB = FixSpacing(false, CompareBox.Text);
                 CurrentDifferenceAOB = CompareBytes(CurrentBaseAOB, CurrentCompareAOB);
                 DifferenceBox.Text = FixSpacing(true, CurrentDifferenceAOB);
+                CurrentHex = CreateHex(CurrentDifferenceAOB);
 
-                HexBox.Text = FixSpacing(true, CreateHex(CurrentDifferenceAOB));
+                HexBox.Text = FixSpacing(true, CurrentHex);
 
                 HexEscapedBox.Text = "\\x" + HexBox.Text;
                 HexEscapedBox.Text = HexEscapedBox.Text.Replace(" ", "\\x");
 
-                ByteArrayBox.Text = CreateByteArray(CurrentDifferenceAOB);
+                ByteArrayBox.Text = CreateByteArray(CurrentHex);
 
-                MaskBox.Text = CreateMask(CurrentDifferenceAOB);
+                MaskBox.Text = CreateMask(CurrentHex);
             }
             else
             {
