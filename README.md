@@ -12,4 +12,4 @@ Automatically generate signatures from an address, or compare your own AOB.
 
 # Previews
 
-![](https://i.imgur.com/Olsc1uD.png)
+![](https://i.imgur.com/jj63kQs.png)
