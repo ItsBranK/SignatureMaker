@@ -25,7 +25,7 @@ namespace Signature_Maker
         string CurrentDifferenceAOB;
         string CurrentHex;
 
-        enum OutputModes : UInt32
+        enum OutputModes : byte
         {
             MODE_HEX = 1,
             MODE_HEX_ESCAPED = 2,
@@ -130,7 +130,7 @@ namespace Signature_Maker
                 result = result.Remove(result.Length - 1);
             }
 
-            if (compareAOB != result)
+            if (DifferenceBox.Text != result)
             {
                 StatusLbl.Text = "Difference detected, it is recommended you repeat multiple times!";
                 StatusLbl.ForeColor = RedColor;
@@ -379,9 +379,29 @@ namespace Signature_Maker
                 CurrentBaseAOB = FixSpacing(false, BaseBox.Text);
                 CurrentCompareAOB = FixSpacing(false, CompareBox.Text);
                 CurrentDifferenceAOB = CompareBytes(CurrentBaseAOB, CurrentCompareAOB);
+
+                if (CurrentBaseAOB != CurrentDifferenceAOB)
+                {
+                    StatusLbl.Text = "Difference detected, it is recommended you repeat multiple times!";
+                    StatusLbl.ForeColor = RedColor;
+                }
+                else
+                {
+                    if (FirstScan)
+                    {
+                        StatusLbl.Text = "First scan detected, it is recommended you repeat multiple times!";
+                        StatusLbl.ForeColor = OrangeColor;
+                        FirstScan = false;
+                    }
+                    else
+                    {
+                        StatusLbl.Text = "No difference detected, array of bytes match!";
+                        StatusLbl.ForeColor = GreenColor;
+                    }
+                }
+
                 DifferenceBox.Text = FixSpacing(true, CurrentDifferenceAOB);
                 CurrentHex = CreateHex(CurrentDifferenceAOB);
-
                 HexBox.Text = FixSpacing(true, CurrentHex);
 
                 HexEscapedBox.Text = "\\x" + HexBox.Text;

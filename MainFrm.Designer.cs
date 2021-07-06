@@ -544,7 +544,7 @@
             this.LengthBox.Size = new System.Drawing.Size(295, 25);
             this.LengthBox.TabIndex = 43;
             this.LengthBox.Value = new decimal(new int[] {
-            2,
+            8,
             0,
             0,
             0});
