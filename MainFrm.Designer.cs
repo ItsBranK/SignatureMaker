@@ -477,7 +477,6 @@ namespace SignatureMaker
             this.MaskBx.ForeColor = System.Drawing.Color.Black;
             this.MaskBx.Location = new System.Drawing.Point(95, 50);
             this.MaskBx.Name = "MaskBx";
-            this.MaskBx.ReadOnly = true;
             this.MaskBx.Size = new System.Drawing.Size(329, 25);
             this.MaskBx.TabIndex = 19;
             // 
@@ -499,7 +498,6 @@ namespace SignatureMaker
             this.BytesBx.ForeColor = System.Drawing.Color.Black;
             this.BytesBx.Location = new System.Drawing.Point(95, 20);
             this.BytesBx.Name = "BytesBx";
-            this.BytesBx.ReadOnly = true;
             this.BytesBx.Size = new System.Drawing.Size(329, 25);
             this.BytesBx.TabIndex = 17;
             // 

@@ -44,8 +44,8 @@ namespace SignatureMaker
             // 
             this.GitHubLbl.BackColor = System.Drawing.Color.Transparent;
             this.GitHubLbl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GitHubLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.GitHubLbl.ForeColor = System.Drawing.Color.Blue;
+            this.GitHubLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.GitHubLbl.ForeColor = System.Drawing.Color.DodgerBlue;
             this.GitHubLbl.Location = new System.Drawing.Point(103, 69);
             this.GitHubLbl.Name = "GitHubLbl";
             this.GitHubLbl.Size = new System.Drawing.Size(255, 30);
@@ -58,8 +58,8 @@ namespace SignatureMaker
             // 
             this.IconsLbl.BackColor = System.Drawing.Color.Transparent;
             this.IconsLbl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconsLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IconsLbl.ForeColor = System.Drawing.Color.Blue;
+            this.IconsLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.IconsLbl.ForeColor = System.Drawing.Color.DodgerBlue;
             this.IconsLbl.Location = new System.Drawing.Point(103, 99);
             this.IconsLbl.Name = "IconsLbl";
             this.IconsLbl.Size = new System.Drawing.Size(255, 30);
@@ -87,7 +87,7 @@ namespace SignatureMaker
             this.ArchetypeLbl.Name = "ArchetypeLbl";
             this.ArchetypeLbl.Size = new System.Drawing.Size(255, 30);
             this.ArchetypeLbl.TabIndex = 6;
-            this.ArchetypeLbl.Text = "x64";
+            this.ArchetypeLbl.Text = "x0";
             this.ArchetypeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // GitHubTitle

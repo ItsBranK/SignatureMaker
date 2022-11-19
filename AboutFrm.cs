@@ -1,4 +1,4 @@
-﻿//#define X64BIT
+﻿#define X64BIT
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace SignatureMaker
 {
     public partial class AboutFrm : Form
     {
-        static readonly string Version = "v2.2";
+        static readonly string Version = "v2.3";
 
         public AboutFrm()
         {

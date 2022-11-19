@@ -1,35 +1,35 @@
-﻿//#define X64BIT
+﻿#define X64BIT
 using System;
 using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace SignatureMaker
 {
     enum OutputModes : byte
     {
-        MODE_HEX = 1,
-        MODE_HEX_ESCAPED = 2,
-        MODE_BYTE_ARRAY = 3,
-        MODE_MASK = 4
+        MODE_HEX,
+        MODE_HEX_ESCAPED,
+        MODE_BYTE_ARRAY,
+        MODE_MASK
     }
 
     enum StatusTypes : byte
     {
-        TYPE_OK = 0,
-        TYPE_INFO = 1,
-        TYPE_WARNING = 2,
-        TYPE_ERROR = 3
+        TYPE_OK,
+        TYPE_INFO,
+        TYPE_WARNING,
+        TYPE_ERROR
     }
 
     public partial class MainFrm : Form
     {
         [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, int size, out IntPtr numberOfBytesRead);
+        public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
 
         bool FirstScan = true;
         OutputModes OutputMode = OutputModes.MODE_HEX_ESCAPED;
@@ -54,27 +54,6 @@ namespace SignatureMaker
 #endif
         }
 
-        private T ConvertByteArray<T>(ref byte[] bytes)
-        {
-            GCHandle handle = default(GCHandle);
-            T result;
-
-            try
-            {
-                handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
-                result = Marshal.PtrToStructure<T>(handle.AddrOfPinnedObject());
-            }
-            finally
-            {
-                if (handle.IsAllocated)
-                {
-                    handle.Free();
-                }
-            }
-
-            return result;
-        }
-
         private byte[] ParsePattern(string pattern)
         {
             string[] patternArray = pattern.Split(' ');
@@ -88,7 +67,7 @@ namespace SignatureMaker
             return phrasedBytes.ToArray();
         }
 
-        private byte[] ReadMemory(IntPtr handle, IntPtr address, int size)
+        private byte[] ReadMemory(IntPtr handle, IntPtr address, Int32 size)
         {
             IntPtr intPtr;
             byte[] array = new byte[size];
@@ -110,24 +89,24 @@ namespace SignatureMaker
             IntPtr bytesRead;
             ReadProcessMemory(process.Handle, baseAddress, moduleBytes, moduleBytes.Length, out bytesRead);
 
-            int pos = 0;
-            int maskLength = mask.Length - 1;
+            Int32 currentPos = 0;
+            Int32 maskLength = (mask.Length - 1);
 
-            for (int modulePos = 0; modulePos < moduleBytes.Length; modulePos++)
+            for (Int32 modulePos = 0; modulePos < moduleBytes.Length; modulePos++)
             {
-                if (moduleBytes[modulePos] == patternBytes[pos] || mask[pos] == '?')
+                if (moduleBytes[modulePos] == patternBytes[currentPos] || mask[currentPos] == '?')
                 {
-                    if (pos == maskLength)
+                    if (currentPos == maskLength)
                     {
-                        return IntPtr.Add(baseAddress, modulePos - maskLength);
+                        return IntPtr.Add(baseAddress, (modulePos - maskLength));
                     }
 
-                    pos++;
+                    currentPos++;
                 }
                 else
                 {
-                    modulePos -= pos;
-                    pos = 0;
+                    modulePos -= currentPos;
+                    currentPos = 0;
                 }
             }
 
@@ -137,16 +116,18 @@ namespace SignatureMaker
         private void LoadProcesses()
         {
             ProcessBx.Items.Clear();
-
             Process[] processList = Process.GetProcesses();
 
             foreach (Process process in processList)
             {
-                ProcessBx.Items.Add(process.ProcessName + " [" + process.Id.ToString() + "]");
+                if (process != null)
+                {
+                    ProcessBx.Items.Add(process.ProcessName + " [" + process.Id.ToString() + "]");
+                }
             }
         }
 
-        private Process FindProcess(int pid)
+        private Process FindProcess(Int32 pid)
         {
             Process[] processList = Process.GetProcesses();
 
@@ -170,9 +151,9 @@ namespace SignatureMaker
                 string rebuiltAOB = "";
                 char[] aobArray = inputAOB.ToCharArray();
 
-                int index = 0;
+                Int32 index = 0;
 
-                for (int i = 0; i < aobArray.Length; i++)
+                for (Int32 i = 0; i < aobArray.Length; i++)
                 {
                     rebuiltAOB += aobArray[i].ToString();
 
@@ -210,10 +191,9 @@ namespace SignatureMaker
 
             string[] inplutSplit = inputAOB.Split(' ');
 
-            for (int i = 0; i < inplutSplit.Length; i++)
+            for (Int32 i = 0; i < inplutSplit.Length; i++)
             {
-                if (inplutSplit[i].Length < 1
-                    || inplutSplit[i].Contains("?"))
+                if ((inplutSplit[i].Length < 1) || inplutSplit[i].Contains("?"))
                 {
                     inplutSplit[i] = "00";
                 }
@@ -229,9 +209,9 @@ namespace SignatureMaker
             string byteArray = "0x";
             inputAOB = inputAOB.Replace("?", "0");
 
-            int index = 0;
+            Int32 index = 0;
 
-            for (int i = 0; i < inputAOB.Length; i++)
+            for (Int32 i = 0; i < inputAOB.Length; i++)
             {
                 if (i != inputAOB.Length)
                 {
@@ -261,11 +241,11 @@ namespace SignatureMaker
             string result = "";
             char[] splitBytes = inputAOB.ToCharArray();
 
-            for (int i = 0; i < splitBytes.Length; i += 2)
+            for (Int32 i = 0; i < splitBytes.Length; i += 2)
             {
-                if (splitBytes[i].ToString() != "?"
-                    && (i + 1) < splitBytes.Length
-                    && splitBytes[(i + 1)].ToString() != "?")
+                if ((splitBytes[i].ToString() != "?")
+                    && ((i + 1) < splitBytes.Length)
+                    && (splitBytes[(i + 1)].ToString() != "?"))
                 {
                     result += "x";
                 }
@@ -284,7 +264,7 @@ namespace SignatureMaker
             char[] baseSplit = inputAOB.ToCharArray();
             char[] compareSplit = compareAOB.ToCharArray();
 
-            for (int i = 0; i < inputAOB.Length; i++)
+            for (Int32 i = 0; i < inputAOB.Length; i++)
             {
                 if (i < compareAOB.Length)
                 {
@@ -304,7 +284,7 @@ namespace SignatureMaker
 
             if (inputAOB.Length < compareAOB.Length)
             {
-                for (int i = inputAOB.Length; i < compareAOB.Length; i++)
+                for (Int32 i = inputAOB.Length; i < compareAOB.Length; i++)
                 {
                     string difference = compareSplit[i].ToString();
                     result += difference;
@@ -312,7 +292,7 @@ namespace SignatureMaker
             }
             else if (inputAOB.Length > compareAOB.Length)
             {
-                for (int i = compareAOB.Length; i < inputAOB.Length; i++)
+                for (Int32 i = compareAOB.Length; i < inputAOB.Length; i++)
                 {
                     string difference = inputAOB[i].ToString();
                     result += difference;
@@ -360,20 +340,20 @@ namespace SignatureMaker
 
         private void ProcessBx_SelectedValueChanged(object sender, EventArgs e)
         {
-            int pidStart = ProcessBx.Text.IndexOf('[') + 1;
+            Int32 pidStart = ProcessBx.Text.IndexOf('[') + 1;
             string pidStr = ProcessBx.Text.Substring(pidStart, (ProcessBx.Text.Length - pidStart) - 1);
-            PIDBx.Value = int.Parse(pidStr);
+            PIDBx.Value = Int32.Parse(pidStr);
         }
 
         private void PIDBx_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Process foundProcess = FindProcess((int)PIDBx.Value);
+                Process foundProcess = FindProcess((Int32)PIDBx.Value);
 
                 if (foundProcess != null)
                 {
-                    ProcessBx.Text = foundProcess.ProcessName + " [" + foundProcess.Id.ToString() + "]";
+                    ProcessBx.Text = (foundProcess.ProcessName + " [" + foundProcess.Id.ToString() + "]");
                 }
             }
         }
@@ -387,15 +367,17 @@ namespace SignatureMaker
         private void PasteBtn_Click(object sender, EventArgs e)
         {
             AddressBx.Text = Clipboard.GetText();
+            AddressBx.Text = AddressBx.Text.Replace("0x", "");
+            AddressBx.Text = AddressBx.Text.Replace("0X", "");
         }
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(AddressBx.Text))
             {
-                Process process = FindProcess((int)PIDBx.Value);
-
+                Process process = FindProcess((Int32)PIDBx.Value);
                 CurrentAddress = AddressBx.Text.Replace("0x", "");
+                CurrentAddress = AddressBx.Text.Replace("0X", "");
 
                 if (process != null)
                 {
@@ -406,7 +388,7 @@ namespace SignatureMaker
 #endif
                     IntPtr addressPointer = (IntPtr)addressDecimal;
 
-                    byte[] foundBytes = ReadMemory(process.Handle, addressPointer, (int)LengthBx.Value);
+                    byte[] foundBytes = ReadMemory(process.Handle, addressPointer, (Int32)LengthBx.Value);
 
                     if (foundBytes != null)
                     {
@@ -414,8 +396,7 @@ namespace SignatureMaker
 
                         if (!string.IsNullOrEmpty(BaseBx.Text))
                         {
-                            if (!string.IsNullOrEmpty(CompareBx.Text)
-                                && !BaseBx.Items.Contains(CompareBx.Text))
+                            if (!string.IsNullOrEmpty(CompareBx.Text) && !BaseBx.Items.Contains(CompareBx.Text))
                             {
                                 BaseBx.Items.Add(CompareBx.Text);
                             }
@@ -536,14 +517,13 @@ namespace SignatureMaker
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(BytesBx.Text)
-                && !string.IsNullOrEmpty(MaskBx.Text))
+            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text))
             {
-                Process process = FindProcess((int)PIDBx.Value);
+                Process process = FindProcess((Int32)PIDBx.Value);
 
                 if (process != null)
                 {
-                    IntPtr foundPointer = FindPattern(process, FixSpacing(CurrentHex, true), CreateMask(CurrentDifferenceAOB));
+                    IntPtr foundPointer = FindPattern(process, FixSpacing(CurrentHex, true), MaskBx.Text);
 
                     if (foundPointer != IntPtr.Zero)
                     {
