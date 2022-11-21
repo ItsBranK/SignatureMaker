@@ -1,12 +1,5 @@
 ﻿#define X64BIT
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -14,8 +7,6 @@ namespace SignatureMaker
 {
     public partial class AboutFrm : Form
     {
-        static readonly string Version = "v2.3";
-
         public AboutFrm()
         {
             InitializeComponent();
@@ -30,7 +21,7 @@ namespace SignatureMaker
             this.Text = "ItsBranK's Signature Maker (x32) - About";
             ArchetypeLbl.Text = "x32";
 #endif
-            VersionLbl.Text = Version;
+            VersionLbl.Text = "v2.3";
         }
 
         private void GitHubLbl_Click(object sender, EventArgs e)

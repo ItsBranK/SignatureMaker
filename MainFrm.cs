@@ -6,24 +6,23 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Reflection;
 
 namespace SignatureMaker
 {
     enum OutputModes : byte
     {
-        MODE_HEX,
-        MODE_HEX_ESCAPED,
-        MODE_BYTE_ARRAY,
-        MODE_MASK
+        Hex,
+        HexEscaped,
+        ByteArray,
+        Mask
     }
 
     enum StatusTypes : byte
     {
-        TYPE_OK,
-        TYPE_INFO,
-        TYPE_WARNING,
-        TYPE_ERROR
+        Success,
+        Info,
+        Warning,
+        Error
     }
 
     public partial class MainFrm : Form
@@ -31,13 +30,9 @@ namespace SignatureMaker
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
 
-        bool FirstScan = true;
-        OutputModes OutputMode = OutputModes.MODE_HEX_ESCAPED;
-        string CurrentAddress = "";
-        string CurrentBaseAOB = "";
-        string CurrentCompareAOB = "";
-        string CurrentDifferenceAOB = "";
-        string CurrentHex = "";
+        bool _FirstScan = true; // If its the users first scan or not, the reset button sets this to true again.
+        OutputModes _CurrentMode = OutputModes.HexEscaped; // Current output mode selected by the user.
+        string _TestHexArray = ""; // Used for testing if the pattern you created works using "FindPattern".
 
         public MainFrm()
         {
@@ -117,13 +112,21 @@ namespace SignatureMaker
         {
             ProcessBx.Items.Clear();
             Process[] processList = Process.GetProcesses();
+            List<string> processNames = new List<string>();
 
             foreach (Process process in processList)
             {
                 if (process != null)
                 {
-                    ProcessBx.Items.Add(process.ProcessName + " [" + process.Id.ToString() + "]");
+                    processNames.Add(process.ProcessName + " [" + process.Id.ToString() + "]");
                 }
+            }
+
+            processNames.Sort();
+
+            foreach (string processName in processNames)
+            {
+                ProcessBx.Items.Add(processName);
             }
         }
 
@@ -142,197 +145,22 @@ namespace SignatureMaker
             return null;
         }
 
-        private string FixSpacing(string inputAOB, bool bAddSpacing)
-        {
-            inputAOB = inputAOB.Replace(" ", "");
-
-            if (bAddSpacing)
-            {
-                string rebuiltAOB = "";
-                char[] aobArray = inputAOB.ToCharArray();
-
-                Int32 index = 0;
-
-                for (Int32 i = 0; i < aobArray.Length; i++)
-                {
-                    rebuiltAOB += aobArray[i].ToString();
-
-                    if (i == aobArray.Length - 1)
-                    {
-                        if ((i + 2) <= aobArray.Length)
-                        {
-                            rebuiltAOB = rebuiltAOB.Insert(i + 2, " ");
-                        }
-                    }
-                    else
-                    {
-                        if (index == 1)
-                        {
-                            rebuiltAOB += " ";
-                            index = 0;
-                        }
-                        else
-                        {
-                            index++;
-                        }
-                    }
-                }
-
-                return rebuiltAOB;
-            }
-
-            return inputAOB;
-        }
-
-        private string CreateHex(string inputAOB)
-        {
-            string result = "";
-            inputAOB = FixSpacing(inputAOB, true);
-
-            string[] inplutSplit = inputAOB.Split(' ');
-
-            for (Int32 i = 0; i < inplutSplit.Length; i++)
-            {
-                if ((inplutSplit[i].Length < 1) || inplutSplit[i].Contains("?"))
-                {
-                    inplutSplit[i] = "00";
-                }
-
-                result += inplutSplit[i];
-            }
-
-            return result;
-        }
-
-        private string CreateByteArray(string inputAOB)
-        {
-            string byteArray = "0x";
-            inputAOB = inputAOB.Replace("?", "0");
-
-            Int32 index = 0;
-
-            for (Int32 i = 0; i < inputAOB.Length; i++)
-            {
-                if (i != inputAOB.Length)
-                {
-                    if (index == 0)
-                    {
-                        index = 1;
-                        byteArray += inputAOB[i].ToString();
-                    }
-                    else if (index == 1)
-                    {
-                        index = 0;
-                        byteArray += inputAOB[i].ToString();
-
-                        if (i != (inputAOB.Length - 1) && (i + 2) <= inputAOB.Length)
-                        {
-                            byteArray += ", 0x";
-                        }
-                    }
-                }
-            }
-
-            return byteArray;
-        }
-
-        private string CreateMask(string inputAOB)
-        {
-            string result = "";
-            char[] splitBytes = inputAOB.ToCharArray();
-
-            for (Int32 i = 0; i < splitBytes.Length; i += 2)
-            {
-                if ((splitBytes[i].ToString() != "?")
-                    && ((i + 1) < splitBytes.Length)
-                    && (splitBytes[(i + 1)].ToString() != "?"))
-                {
-                    result += "x";
-                }
-                else if ((i + 1) < splitBytes.Length)
-                {
-                    result += "?";
-                }
-            }
-
-            return result;
-        }
-
-        private string CompareBytes(string inputAOB, string compareAOB, out bool bBytesEqual)
-        {
-            string result = "";
-            char[] baseSplit = inputAOB.ToCharArray();
-            char[] compareSplit = compareAOB.ToCharArray();
-
-            for (Int32 i = 0; i < inputAOB.Length; i++)
-            {
-                if (i < compareAOB.Length)
-                {
-                    string baseHex = baseSplit[i].ToString();
-                    string compareHex = compareSplit[i].ToString();
-
-                    if (baseHex == compareHex)
-                    {
-                        result += compareHex;
-                    }
-                    else
-                    {
-                        result += "?";
-                    }
-                }
-            }
-
-            if (inputAOB.Length < compareAOB.Length)
-            {
-                for (Int32 i = inputAOB.Length; i < compareAOB.Length; i++)
-                {
-                    string difference = compareSplit[i].ToString();
-                    result += difference;
-                }
-            }
-            else if (inputAOB.Length > compareAOB.Length)
-            {
-                for (Int32 i = compareAOB.Length; i < inputAOB.Length; i++)
-                {
-                    string difference = inputAOB[i].ToString();
-                    result += difference;
-                }
-            }
-
-            if ((result.Length & 1) == 1)
-            {
-                result = result.Remove(result.Length - 1);
-            }
-
-            if (result != compareAOB)
-            {
-                bBytesEqual = false;
-            }
-            else
-            {
-                bBytesEqual = true;
-                return compareAOB;
-            }
-
-            return result;
-        }
-
         private void SetStatus(string text, StatusTypes type)
         {
             StatusLbl.Text = "Status: " + text;
 
             switch (type)
             {
-                case StatusTypes.TYPE_OK:
+                case StatusTypes.Success:
                     StatusLbl.ForeColor = Color.LimeGreen;
                     break;
-                case StatusTypes.TYPE_INFO:
+                case StatusTypes.Info:
                     StatusLbl.ForeColor = Color.DodgerBlue;
                     break;
-                case StatusTypes.TYPE_WARNING:
+                case StatusTypes.Warning:
                     StatusLbl.ForeColor = Color.DarkOrange;
                     break;
-                case StatusTypes.TYPE_ERROR:
+                case StatusTypes.Error:
                     StatusLbl.ForeColor = Color.Crimson;
                     break;
             }
@@ -376,15 +204,14 @@ namespace SignatureMaker
             if (!string.IsNullOrEmpty(AddressBx.Text))
             {
                 Process process = FindProcess((Int32)PIDBx.Value);
-                CurrentAddress = AddressBx.Text.Replace("0x", "");
-                CurrentAddress = AddressBx.Text.Replace("0X", "");
+                string addressFormatted = AddressBx.Text.Replace("0x", "").Replace("0X", "");
 
                 if (process != null)
                 {
 #if X64BIT
-                    Int64 addressDecimal = Int64.Parse(CurrentAddress, NumberStyles.HexNumber);
+                    Int64 addressDecimal = Int64.Parse(addressFormatted, NumberStyles.HexNumber);
 #else
-                    Int32 addressDecimal = Int32.Parse(CurrentAddress, NumberStyles.HexNumber);
+                    Int32 addressDecimal = Int32.Parse(addressFormatted, NumberStyles.HexNumber);
 #endif
                     IntPtr addressPointer = (IntPtr)addressDecimal;
 
@@ -392,7 +219,7 @@ namespace SignatureMaker
 
                     if (foundBytes != null)
                     {
-                        CurrentBaseAOB = BitConverter.ToString(foundBytes).Replace("-", "");
+                        string comparedBytes = BitConverter.ToString(foundBytes).Replace("-", "");
 
                         if (!string.IsNullOrEmpty(BaseBx.Text))
                         {
@@ -402,23 +229,22 @@ namespace SignatureMaker
                             }
 
                             CompareBx.Text = BaseBx.Text;
-                            CurrentCompareAOB = CompareBx.Text;
                         }
                         else
                         {
-                            CompareBx.Text = FixSpacing(CurrentBaseAOB, true);
+                            CompareBx.Text = Format.FormatSpacing(comparedBytes);
                         }
 
-                        BaseBx.Text = FixSpacing(CurrentBaseAOB, true);
+                        BaseBx.Text = Format.FormatSpacing(comparedBytes);
                     }
                     else
                     {
-                        SetStatus("Failed to find desired address! Cannot create signature!", StatusTypes.TYPE_ERROR);
+                        SetStatus("Failed to find desired address! Cannot create signature!", StatusTypes.Error);
                     }
                 }
                 else
                 {
-                    SetStatus("Failed to find selected process, PID invalid!", StatusTypes.TYPE_ERROR);
+                    SetStatus("Failed to find selected process, PID invalid!", StatusTypes.Error);
                 }
             }
         }
@@ -427,49 +253,46 @@ namespace SignatureMaker
         {
             if (!string.IsNullOrEmpty(BaseBx.Text) && !string.IsNullOrEmpty(CompareBx.Text))
             {
-                bool areEqual = false;
-                CurrentBaseAOB = FixSpacing(BaseBx.Text, false);
-                CurrentCompareAOB = FixSpacing(CompareBx.Text, false);
-                CurrentDifferenceAOB = CompareBytes(CurrentBaseAOB, CurrentCompareAOB, out areEqual);
+                string baseArray = BaseBx.Text.Replace(" ", "");
+                string compareArray = CompareBx.Text.Replace(" ", "");
 
-                if (!areEqual)
+                if (baseArray != compareArray)
                 {
-                    SetStatus("Difference detected, repeat multiple times!", StatusTypes.TYPE_WARNING);
+                    SetStatus("Difference detected, repeat multiple times!", StatusTypes.Warning);
                 }
                 else
                 {
-                    if (FirstScan)
+                    if (_FirstScan)
                     {
-                        FirstScan = false;
-                        SetStatus("First scan detected, repeat multiple times!", StatusTypes.TYPE_INFO);
+                        _FirstScan = false;
+                        SetStatus("First scan detected, repeat multiple times!", StatusTypes.Info);
                     }
                     else
                     {
-                        SetStatus("No difference detected, array of bytes match!", StatusTypes.TYPE_OK);
+                        SetStatus("No difference detected, array of bytes match!", StatusTypes.Success);
                     }
                 }
 
-                DifferenceBx.Text = FixSpacing(CurrentDifferenceAOB, true);
-                CurrentHex = CreateHex(CurrentDifferenceAOB);
-                MaskBx.Text = CreateMask(CurrentDifferenceAOB);
+                string comparedBytes = Format.CompareBytes(baseArray, compareArray);
+                DifferenceBx.Text = Format.FormatSpacing(comparedBytes);
+                MaskBx.Text = Format.CreateHalfMask(comparedBytes);
 
-                switch (OutputMode)
+                switch (_CurrentMode)
                 {
-                    case OutputModes.MODE_HEX:
-                        BytesBx.Text = FixSpacing(CurrentHex, true);
+                    case OutputModes.Hex:
+                        BytesBx.Text = Format.CreateHex(comparedBytes);
                         break;
-                    case OutputModes.MODE_HEX_ESCAPED:
-                        BytesBx.Text = "\\x" + FixSpacing(CurrentHex, true);
-                        BytesBx.Text = BytesBx.Text.Replace(" ", "\\x");
+                    case OutputModes.HexEscaped:
+                        BytesBx.Text = Format.CreateHexEscaped(comparedBytes);
                         break;
-                    case OutputModes.MODE_BYTE_ARRAY:
-                        BytesBx.Text = CreateByteArray(CurrentHex);
+                    case OutputModes.ByteArray:
+                        BytesBx.Text = Format.CreateByteArray(comparedBytes);
                         break;
                 }
             }
             else
             {
-                SetStatus("Input fields are empty!", StatusTypes.TYPE_ERROR);
+                SetStatus("Input fields are empty!", StatusTypes.Error);
             }
         }
 
@@ -512,36 +335,36 @@ namespace SignatureMaker
             DifferenceBx.Clear();
             BytesBx.Clear();
             MaskBx.Clear();
-            FirstScan = true;
+            _FirstScan = true;
         }
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text))
+            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !String.IsNullOrEmpty(_TestHexArray))
             {
                 Process process = FindProcess((Int32)PIDBx.Value);
 
                 if (process != null)
                 {
-                    IntPtr foundPointer = FindPattern(process, FixSpacing(CurrentHex, true), MaskBx.Text);
+                    IntPtr foundPointer = FindPattern(process, Format.FormatSpacing(_TestHexArray), MaskBx.Text);
 
                     if (foundPointer != IntPtr.Zero)
                     {
-                        SetStatus("Found pointer at 0x" + foundPointer.ToString("X"), StatusTypes.TYPE_OK);
+                        SetStatus("Found pointer at 0x" + foundPointer.ToString("X"), StatusTypes.Success);
                     }
                     else
                     {
-                        SetStatus("Failed to find valid pointer with the given signature!", StatusTypes.TYPE_WARNING);
+                        SetStatus("Failed to find valid pointer with the given signature!", StatusTypes.Warning);
                     }
                 }
                 else
                 {
-                    SetStatus("Process no longer active, cannot test signature!", StatusTypes.TYPE_WARNING);
+                    SetStatus("Process no longer active, cannot test signature!", StatusTypes.Warning);
                 }
             }
             else
             {
-                SetStatus("No signature created, cannot test signature!", StatusTypes.TYPE_ERROR);
+                SetStatus("No signature created, cannot test signature!", StatusTypes.Error);
             }
         }
 
@@ -558,7 +381,7 @@ namespace SignatureMaker
 
         private void HexMenuItem_Click(object sender, EventArgs e)
         {
-            OutputMode = OutputModes.MODE_HEX;
+            _CurrentMode = OutputModes.Hex;
             HexMenuItem.Text = "√ Hex";
             EscapedMenuItem.Text = "Hex Escaped";
             ByteArrayMenuItem.Text = "Byte Array";
@@ -566,7 +389,7 @@ namespace SignatureMaker
 
         private void EscapedMenuItem_Click(object sender, EventArgs e)
         {
-            OutputMode = OutputModes.MODE_HEX_ESCAPED;
+            _CurrentMode = OutputModes.HexEscaped;
             HexMenuItem.Text = "Hex";
             EscapedMenuItem.Text = "√ Hex Escaped";
             ByteArrayMenuItem.Text = "Byte Array";
@@ -574,7 +397,7 @@ namespace SignatureMaker
 
         private void ByteArrayMenuItem_Click(object sender, EventArgs e)
         {
-            OutputMode = OutputModes.MODE_BYTE_ARRAY;
+            _CurrentMode = OutputModes.ByteArray;
             HexMenuItem.Text = "Hex";
             EscapedMenuItem.Text = "Hex Escaped";
             ByteArrayMenuItem.Text = "√ Byte Array";
