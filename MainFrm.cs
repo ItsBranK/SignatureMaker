@@ -30,7 +30,6 @@ namespace SignatureMaker
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
 
-        bool _FirstScan = true; // If its the users first scan or not, the reset button sets this to true again.
         OutputModes _CurrentMode = OutputModes.HexEscaped; // Current output mode selected by the user.
         string _TestHexArray = ""; // Used for testing if the pattern you created works using "FindPattern".
 
@@ -77,31 +76,34 @@ namespace SignatureMaker
 
         private IntPtr FindPattern(Process process, string pattern, string mask)
         {
-            IntPtr baseAddress = process.MainModule.BaseAddress;
-            byte[] moduleBytes = new byte[process.MainModule.ModuleMemorySize];
-            byte[] patternBytes = ParsePattern(pattern);
-
-            IntPtr bytesRead;
-            ReadProcessMemory(process.Handle, baseAddress, moduleBytes, moduleBytes.Length, out bytesRead);
-
-            Int32 currentPos = 0;
-            Int32 maskLength = (mask.Length - 1);
-
-            for (Int32 modulePos = 0; modulePos < moduleBytes.Length; modulePos++)
+            if (!string.IsNullOrEmpty(pattern) && !string.IsNullOrEmpty(mask))
             {
-                if (moduleBytes[modulePos] == patternBytes[currentPos] || mask[currentPos] == '?')
-                {
-                    if (currentPos == maskLength)
-                    {
-                        return IntPtr.Add(baseAddress, (modulePos - maskLength));
-                    }
+                IntPtr baseAddress = process.MainModule.BaseAddress;
+                byte[] moduleBytes = new byte[process.MainModule.ModuleMemorySize];
+                byte[] patternBytes = ParsePattern(pattern);
 
-                    currentPos++;
-                }
-                else
+                IntPtr bytesRead;
+                ReadProcessMemory(process.Handle, baseAddress, moduleBytes, moduleBytes.Length, out bytesRead);
+
+                Int32 currentPos = 0;
+                Int32 maskLength = (mask.Length - 1);
+
+                for (Int32 modulePos = 0; modulePos < moduleBytes.Length; modulePos++)
                 {
-                    modulePos -= currentPos;
-                    currentPos = 0;
+                    if ((moduleBytes[modulePos] == patternBytes[currentPos]) || (mask[currentPos] == '?'))
+                    {
+                        if (currentPos == maskLength)
+                        {
+                            return IntPtr.Add(baseAddress, (modulePos - maskLength));
+                        }
+
+                        currentPos++;
+                    }
+                    else
+                    {
+                        modulePos -= currentPos;
+                        currentPos = 0;
+                    }
                 }
             }
 
@@ -253,27 +255,21 @@ namespace SignatureMaker
         {
             if (!string.IsNullOrEmpty(BaseBx.Text) && !string.IsNullOrEmpty(CompareBx.Text))
             {
-                string baseArray = BaseBx.Text.Replace(" ", "");
-                string compareArray = CompareBx.Text.Replace(" ", "");
-
-                if (baseArray != compareArray)
+                if (!BaseBx.Items.Contains(BaseBx.Text))
                 {
-                    SetStatus("Difference detected, repeat multiple times!", StatusTypes.Warning);
-                }
-                else
-                {
-                    if (_FirstScan)
-                    {
-                        _FirstScan = false;
-                        SetStatus("First scan detected, repeat multiple times!", StatusTypes.Info);
-                    }
-                    else
-                    {
-                        SetStatus("No difference detected, array of bytes match!", StatusTypes.Success);
-                    }
+                    BaseBx.Items.Add(BaseBx.Text);
                 }
 
-                string comparedBytes = Format.CompareBytes(baseArray, compareArray);
+                List<string> baseList = new List<string>();
+
+                foreach (string str in BaseBx.Items)
+                {
+                    baseList.Add(str);
+                }
+
+                string oldBtes = BytesBx.Text;
+                string oldMask = MaskBx.Text;
+                string comparedBytes = Format.CompareByteList(baseList, CompareBx.Text);
                 DifferenceBx.Text = Format.FormatSpacing(comparedBytes);
                 MaskBx.Text = Format.CreateHalfMask(comparedBytes);
 
@@ -289,6 +285,17 @@ namespace SignatureMaker
                         BytesBx.Text = Format.CreateByteArray(comparedBytes);
                         break;
                 }
+
+                if ((oldBtes != BytesBx.Text) || (oldMask != MaskBx.Text))
+                {
+                    SetStatus("Difference detected, you should repeat multiple times!", StatusTypes.Warning);
+                }
+                else
+                {
+                    SetStatus("No difference detected, given array of bytes match!", StatusTypes.Success);
+                }
+
+                _TestHexArray = Format.CreateHex(comparedBytes);
             }
             else
             {
@@ -331,16 +338,16 @@ namespace SignatureMaker
             AddressBx.Clear();
             LengthBx.Value = 8;
             BaseBx.Text = "";
+            BaseBx.Items.Clear();
             CompareBx.Clear();
             DifferenceBx.Clear();
             BytesBx.Clear();
             MaskBx.Clear();
-            _FirstScan = true;
         }
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !String.IsNullOrEmpty(_TestHexArray))
+            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !string.IsNullOrEmpty(_TestHexArray))
             {
                 Process process = FindProcess((Int32)PIDBx.Value);
 
@@ -382,7 +389,7 @@ namespace SignatureMaker
         private void HexMenuItem_Click(object sender, EventArgs e)
         {
             _CurrentMode = OutputModes.Hex;
-            HexMenuItem.Text = "√ Hex";
+            HexMenuItem.Text = "> Hex";
             EscapedMenuItem.Text = "Hex Escaped";
             ByteArrayMenuItem.Text = "Byte Array";
         }
@@ -391,7 +398,7 @@ namespace SignatureMaker
         {
             _CurrentMode = OutputModes.HexEscaped;
             HexMenuItem.Text = "Hex";
-            EscapedMenuItem.Text = "√ Hex Escaped";
+            EscapedMenuItem.Text = "> Hex Escaped";
             ByteArrayMenuItem.Text = "Byte Array";
         }
 
@@ -400,7 +407,12 @@ namespace SignatureMaker
             _CurrentMode = OutputModes.ByteArray;
             HexMenuItem.Text = "Hex";
             EscapedMenuItem.Text = "Hex Escaped";
-            ByteArrayMenuItem.Text = "√ Byte Array";
+            ByteArrayMenuItem.Text = "> Byte Array";
+        }
+
+        private void BaseBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

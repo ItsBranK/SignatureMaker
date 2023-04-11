@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SignatureMaker
 {
@@ -48,6 +49,16 @@ namespace SignatureMaker
             }
 
             return comparedBytes;
+        }
+
+        public static string CompareByteList(List<string> originalList, string compareArray)
+        {
+            foreach (string newArray in originalList)
+            {
+                compareArray = CompareBytes(compareArray, newArray);
+            }
+
+            return compareArray;
         }
 
         // Inserts a space between every two characets in a string.

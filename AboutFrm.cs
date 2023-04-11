@@ -21,7 +21,7 @@ namespace SignatureMaker
             this.Text = "ItsBranK's Signature Maker (x32) - About";
             ArchetypeLbl.Text = "x32";
 #endif
-            VersionLbl.Text = "v2.3";
+            VersionLbl.Text = "v2.4";
         }
 
         private void GitHubLbl_Click(object sender, EventArgs e)

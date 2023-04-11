@@ -1,4 +1,4 @@
-# ItsBranK's Signature Maker v2.3
+# ItsBranK's Signature Maker v2.4
 ### .NET 7.0 Windows
 
 Automatically generate signatures from an address, or compare your own array of bytes.
