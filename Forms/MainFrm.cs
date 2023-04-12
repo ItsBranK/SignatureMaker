@@ -88,20 +88,20 @@ namespace SignatureMaker
                 Int32 currentPos = 0;
                 Int32 maskLength = (mask.Length - 1);
 
-                for (Int32 modulePos = 0; modulePos < moduleBytes.Length; modulePos++)
+                for (Int32 retAddress = 0; retAddress < moduleBytes.Length; retAddress++)
                 {
-                    if ((moduleBytes[modulePos] == patternBytes[currentPos]) || (mask[currentPos] == '?'))
+                    if ((moduleBytes[retAddress] == patternBytes[currentPos]) || (mask[currentPos] == '?'))
                     {
                         if (currentPos == maskLength)
                         {
-                            return IntPtr.Add(baseAddress, (modulePos - maskLength));
+                            return IntPtr.Add(baseAddress, (retAddress - maskLength));
                         }
 
                         currentPos++;
                     }
                     else
                     {
-                        modulePos -= currentPos;
+                        retAddress -= currentPos;
                         currentPos = 0;
                     }
                 }

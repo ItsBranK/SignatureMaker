@@ -4,10 +4,10 @@
     <_LastSelectedProfileId>E:\Files\Visual Studio Projects\SignatureMaker\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="AboutFrm.cs">
+    <Compile Update="Forms\AboutFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainFrm.cs">
+    <Compile Update="Forms\MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
