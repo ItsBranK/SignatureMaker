@@ -13,5 +13,5 @@ Automatically generate signatures from an address, or compare your own array of 
 
 # Previews
 
-![](https://i.imgur.com/JRzG0C9.png)
-![](https://i.imgur.com/trp9r9G.png)
+![](Previews/Preview_0.png?raw=true)
+![](Previews/Preview_1.png?raw=true)
