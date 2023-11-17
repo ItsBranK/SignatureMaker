@@ -1,4 +1,4 @@
-﻿#define X64BIT
+﻿//#define X64BIT
 using System;
 using System.Drawing;
 using System.Diagnostics;
@@ -170,8 +170,8 @@ namespace SignatureMaker
 
         private void ProcessBx_SelectedValueChanged(object sender, EventArgs e)
         {
-            Int32 pidStart = ProcessBx.Text.IndexOf('[') + 1;
-            string pidStr = ProcessBx.Text.Substring(pidStart, (ProcessBx.Text.Length - pidStart) - 1);
+            Int32 pidStart = (ProcessBx.Text.IndexOf('[') + 1);
+            string pidStr = ProcessBx.Text.Substring(pidStart, ((ProcessBx.Text.Length - pidStart) - 1));
             PIDBx.Value = Int32.Parse(pidStr);
         }
 
@@ -408,11 +408,6 @@ namespace SignatureMaker
             HexMenuItem.Text = "Hex";
             EscapedMenuItem.Text = "Hex Escaped";
             ByteArrayMenuItem.Text = "> Byte Array";
-        }
-
-        private void BaseBx_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

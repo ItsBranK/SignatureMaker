@@ -89,7 +89,7 @@ namespace SignatureMaker
             ModesMenuItem.ForeColor = System.Drawing.Color.Black;
             ModesMenuItem.Image = Properties.Resources.Settings;
             ModesMenuItem.Name = "ModesMenuItem";
-            ModesMenuItem.Size = new System.Drawing.Size(146, 22);
+            ModesMenuItem.Size = new System.Drawing.Size(180, 22);
             ModesMenuItem.Text = "Output Mode";
             // 
             // HexMenuItem
@@ -124,7 +124,7 @@ namespace SignatureMaker
             ExitMenuItem.ForeColor = System.Drawing.Color.Black;
             ExitMenuItem.Image = Properties.Resources.Exit;
             ExitMenuItem.Name = "ExitMenuItem";
-            ExitMenuItem.Size = new System.Drawing.Size(146, 22);
+            ExitMenuItem.Size = new System.Drawing.Size(180, 22);
             ExitMenuItem.Text = "Exit";
             ExitMenuItem.Click += ExitMenuItem_Click;
             // 
@@ -348,7 +348,6 @@ namespace SignatureMaker
             BaseBx.Name = "BaseBx";
             BaseBx.Size = new System.Drawing.Size(391, 25);
             BaseBx.TabIndex = 5;
-            BaseBx.SelectedIndexChanged += BaseBx_SelectedIndexChanged;
             // 
             // CompareBx
             // 
