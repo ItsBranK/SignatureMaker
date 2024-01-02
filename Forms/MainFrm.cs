@@ -1,4 +1,4 @@
-﻿//#define X64BIT
+﻿#define X64BIT
 using System;
 using System.Drawing;
 using System.Diagnostics;
@@ -30,8 +30,9 @@ namespace SignatureMaker
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
 
-        OutputModes _CurrentMode = OutputModes.HexEscaped; // Current output mode selected by the user.
-        string _TestHexArray = ""; // Used for testing if the pattern you created works using "FindPattern".
+        private static bool _x64Bit = true;
+        OutputModes _outputMode = OutputModes.HexEscaped; // Current output mode selected by the user.
+        string _textArray = ""; // Used for testing if the pattern you created works using "FindPattern".
 
         public MainFrm()
         {
@@ -40,12 +41,16 @@ namespace SignatureMaker
 
         private void MainFrm_Load(object sender, EventArgs e)
         {
+            if (_x64Bit)
+            {
+                this.Text = "ItsBranK's Signature Maker (x64)";
+            }
+            else
+            {
+                this.Text = "ItsBranK's Signature Maker (x32)";
+            }
+
             LoadProcesses();
-#if X64BIT
-            this.Text = "ItsBranK's Signature Maker (x64)";
-#else
-            this.Text = "ItsBranK's Signature Maker (x32)";
-#endif
         }
 
         private byte[] ParsePattern(string pattern)
@@ -147,6 +152,27 @@ namespace SignatureMaker
             return null;
         }
 
+        private void SetMode(OutputModes mode)
+        {
+            _outputMode = mode;
+            HexMenuItem.Text = "Hex";
+            EscapedMenuItem.Text = "Hex Escaped";
+            ArrayMenuItem.Text = "Byte Array";
+
+            switch (_outputMode)
+            {
+                case OutputModes.Hex:
+                    HexMenuItem.Text = "> Hex";
+                    break;
+                case OutputModes.HexEscaped:
+                    EscapedMenuItem.Text = "> Hex Escaped";
+                    break;
+                case OutputModes.ByteArray:
+                    ArrayMenuItem.Text = "> Byte Array";
+                    break;
+            }
+        }
+
         private void SetStatus(string text, StatusTypes type)
         {
             StatusLbl.Text = "Status: " + text;
@@ -203,19 +229,15 @@ namespace SignatureMaker
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddressBx.Text))
+            string addressStr = AddressBx.Text.Replace("0x", "").Replace("0X", "");
+
+            if (Format.IsStringHexadecimal(addressStr))
             {
-                Process process = FindProcess((Int32)PIDBx.Value);
-                string addressFormatted = AddressBx.Text.Replace("0x", "").Replace("0X", "");
+                Process process = FindProcess((Int32)PIDBx.Value);  
 
                 if (process != null)
                 {
-#if X64BIT
-                    Int64 addressDecimal = Int64.Parse(addressFormatted, NumberStyles.HexNumber);
-#else
-                    Int32 addressDecimal = Int32.Parse(addressFormatted, NumberStyles.HexNumber);
-#endif
-                    IntPtr addressPointer = (IntPtr)addressDecimal;
+                    IntPtr addressPointer = (IntPtr)(_x64Bit ? Int64.Parse(addressStr, NumberStyles.HexNumber) : Int32.Parse(addressStr, NumberStyles.HexNumber));
 
                     byte[] foundBytes = ReadMemory(process.Handle, addressPointer, (Int32)LengthBx.Value);
 
@@ -273,7 +295,7 @@ namespace SignatureMaker
                 DifferenceBx.Text = Format.FormatSpacing(comparedBytes);
                 MaskBx.Text = Format.CreateHalfMask(comparedBytes);
 
-                switch (_CurrentMode)
+                switch (_outputMode)
                 {
                     case OutputModes.Hex:
                         BytesBx.Text = Format.CreateHex(comparedBytes);
@@ -295,7 +317,7 @@ namespace SignatureMaker
                     SetStatus("No difference detected, given array of bytes match!", StatusTypes.Success);
                 }
 
-                _TestHexArray = Format.CreateHex(comparedBytes);
+                _textArray = Format.CreateHex(comparedBytes);
             }
             else
             {
@@ -347,13 +369,13 @@ namespace SignatureMaker
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !string.IsNullOrEmpty(_TestHexArray))
+            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !string.IsNullOrEmpty(_textArray))
             {
                 Process process = FindProcess((Int32)PIDBx.Value);
 
                 if (process != null)
                 {
-                    IntPtr foundPointer = FindPattern(process, Format.FormatSpacing(_TestHexArray), MaskBx.Text);
+                    IntPtr foundPointer = FindPattern(process, Format.FormatSpacing(_textArray), MaskBx.Text);
 
                     if (foundPointer != IntPtr.Zero)
                     {
@@ -375,11 +397,6 @@ namespace SignatureMaker
             }
         }
 
-        private void ExitMenuItem_Click(object sender, EventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
         private void AboutMenuItem_Click(object sender, EventArgs e)
         {
             AboutFrm aboutFrm = new AboutFrm();
@@ -388,26 +405,17 @@ namespace SignatureMaker
 
         private void HexMenuItem_Click(object sender, EventArgs e)
         {
-            _CurrentMode = OutputModes.Hex;
-            HexMenuItem.Text = "> Hex";
-            EscapedMenuItem.Text = "Hex Escaped";
-            ByteArrayMenuItem.Text = "Byte Array";
+            SetMode(OutputModes.Hex);
         }
 
         private void EscapedMenuItem_Click(object sender, EventArgs e)
         {
-            _CurrentMode = OutputModes.HexEscaped;
-            HexMenuItem.Text = "Hex";
-            EscapedMenuItem.Text = "> Hex Escaped";
-            ByteArrayMenuItem.Text = "Byte Array";
+            SetMode(OutputModes.HexEscaped);
         }
 
-        private void ByteArrayMenuItem_Click(object sender, EventArgs e)
+        private void ArrayMenuItem_Click(object sender, EventArgs e)
         {
-            _CurrentMode = OutputModes.ByteArray;
-            HexMenuItem.Text = "Hex";
-            EscapedMenuItem.Text = "Hex Escaped";
-            ByteArrayMenuItem.Text = "> Byte Array";
+            SetMode(OutputModes.ByteArray);
         }
     }
 }

@@ -30,12 +30,10 @@ namespace SignatureMaker
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrm));
-            FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ModesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ModeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             HexMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             EscapedMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ByteArrayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ArrayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             MenuCtrl = new System.Windows.Forms.MenuStrip();
             ProcessGroupBx = new System.Windows.Forms.GroupBox();
@@ -76,57 +74,37 @@ namespace SignatureMaker
             OutputGroupBx.SuspendLayout();
             SuspendLayout();
             // 
-            // FileMenuItem
+            // ModeMenuItem
             // 
-            FileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ModesMenuItem, ExitMenuItem });
-            FileMenuItem.Name = "FileMenuItem";
-            FileMenuItem.Size = new System.Drawing.Size(37, 20);
-            FileMenuItem.Text = "File";
-            // 
-            // ModesMenuItem
-            // 
-            ModesMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { HexMenuItem, EscapedMenuItem, ByteArrayMenuItem });
-            ModesMenuItem.ForeColor = System.Drawing.Color.Black;
-            ModesMenuItem.Image = Properties.Resources.Settings;
-            ModesMenuItem.Name = "ModesMenuItem";
-            ModesMenuItem.Size = new System.Drawing.Size(180, 22);
-            ModesMenuItem.Text = "Output Mode";
+            ModeMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { HexMenuItem, EscapedMenuItem, ArrayMenuItem });
+            ModeMenuItem.Name = "ModeMenuItem";
+            ModeMenuItem.Size = new System.Drawing.Size(50, 20);
+            ModeMenuItem.Text = "Mode";
             // 
             // HexMenuItem
             // 
-            HexMenuItem.ForeColor = System.Drawing.Color.Black;
             HexMenuItem.Image = Properties.Resources.Hex;
             HexMenuItem.Name = "HexMenuItem";
-            HexMenuItem.Size = new System.Drawing.Size(152, 22);
+            HexMenuItem.Size = new System.Drawing.Size(180, 22);
             HexMenuItem.Text = "Hex";
             HexMenuItem.Click += HexMenuItem_Click;
             // 
             // EscapedMenuItem
             // 
-            EscapedMenuItem.ForeColor = System.Drawing.Color.Black;
             EscapedMenuItem.Image = Properties.Resources.Escaped;
             EscapedMenuItem.Name = "EscapedMenuItem";
-            EscapedMenuItem.Size = new System.Drawing.Size(152, 22);
+            EscapedMenuItem.Size = new System.Drawing.Size(180, 22);
             EscapedMenuItem.Text = "> Hex Escaped";
             EscapedMenuItem.Click += EscapedMenuItem_Click;
             // 
-            // ByteArrayMenuItem
+            // ArrayMenuItem
             // 
-            ByteArrayMenuItem.ForeColor = System.Drawing.Color.Black;
-            ByteArrayMenuItem.Image = Properties.Resources.Array;
-            ByteArrayMenuItem.Name = "ByteArrayMenuItem";
-            ByteArrayMenuItem.Size = new System.Drawing.Size(152, 22);
-            ByteArrayMenuItem.Text = "Byte Array";
-            ByteArrayMenuItem.Click += ByteArrayMenuItem_Click;
-            // 
-            // ExitMenuItem
-            // 
-            ExitMenuItem.ForeColor = System.Drawing.Color.Black;
-            ExitMenuItem.Image = Properties.Resources.Exit;
-            ExitMenuItem.Name = "ExitMenuItem";
-            ExitMenuItem.Size = new System.Drawing.Size(180, 22);
-            ExitMenuItem.Text = "Exit";
-            ExitMenuItem.Click += ExitMenuItem_Click;
+            ArrayMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            ArrayMenuItem.Image = Properties.Resources.Array;
+            ArrayMenuItem.Name = "ArrayMenuItem";
+            ArrayMenuItem.Size = new System.Drawing.Size(180, 22);
+            ArrayMenuItem.Text = "Byte Array";
+            ArrayMenuItem.Click += ArrayMenuItem_Click;
             // 
             // AboutMenuItem
             // 
@@ -137,7 +115,7 @@ namespace SignatureMaker
             // 
             // MenuCtrl
             // 
-            MenuCtrl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { FileMenuItem, AboutMenuItem });
+            MenuCtrl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ModeMenuItem, AboutMenuItem });
             MenuCtrl.Location = new System.Drawing.Point(0, 0);
             MenuCtrl.Name = "MenuCtrl";
             MenuCtrl.Size = new System.Drawing.Size(519, 24);
@@ -197,7 +175,7 @@ namespace SignatureMaker
             // 
             LengthBx.BackColor = System.Drawing.Color.White;
             LengthBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            LengthBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LengthBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             LengthBx.ForeColor = System.Drawing.Color.Black;
             LengthBx.Increment = new decimal(new int[] { 2, 0, 0, 0 });
             LengthBx.Location = new System.Drawing.Point(95, 80);
@@ -212,7 +190,7 @@ namespace SignatureMaker
             // 
             PIDBx.BackColor = System.Drawing.Color.White;
             PIDBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            PIDBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PIDBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             PIDBx.ForeColor = System.Drawing.Color.Black;
             PIDBx.Location = new System.Drawing.Point(316, 20);
             PIDBx.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
@@ -225,7 +203,7 @@ namespace SignatureMaker
             // 
             ProcessBx.BackColor = System.Drawing.Color.White;
             ProcessBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            ProcessBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ProcessBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             ProcessBx.ForeColor = System.Drawing.Color.Black;
             ProcessBx.FormattingEnabled = true;
             ProcessBx.Location = new System.Drawing.Point(95, 20);
@@ -238,7 +216,7 @@ namespace SignatureMaker
             // 
             AddressBx.BackColor = System.Drawing.Color.White;
             AddressBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            AddressBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AddressBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             AddressBx.ForeColor = System.Drawing.Color.Black;
             AddressBx.Location = new System.Drawing.Point(95, 50);
             AddressBx.Name = "AddressBx";
@@ -248,7 +226,7 @@ namespace SignatureMaker
             // LengthLbl
             // 
             LengthLbl.BackColor = System.Drawing.Color.Transparent;
-            LengthLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LengthLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             LengthLbl.Location = new System.Drawing.Point(5, 80);
             LengthLbl.Name = "LengthLbl";
             LengthLbl.Size = new System.Drawing.Size(85, 25);
@@ -259,7 +237,7 @@ namespace SignatureMaker
             // AddressLbl
             // 
             AddressLbl.BackColor = System.Drawing.Color.Transparent;
-            AddressLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AddressLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             AddressLbl.Location = new System.Drawing.Point(5, 50);
             AddressLbl.Name = "AddressLbl";
             AddressLbl.Size = new System.Drawing.Size(85, 25);
@@ -270,7 +248,7 @@ namespace SignatureMaker
             // ProcessLbl
             // 
             ProcessLbl.BackColor = System.Drawing.Color.Transparent;
-            ProcessLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ProcessLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             ProcessLbl.Location = new System.Drawing.Point(5, 20);
             ProcessLbl.Name = "ProcessLbl";
             ProcessLbl.Size = new System.Drawing.Size(85, 25);
@@ -299,7 +277,7 @@ namespace SignatureMaker
             // 
             DifferenceBx.BackColor = System.Drawing.Color.White;
             DifferenceBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            DifferenceBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DifferenceBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             DifferenceBx.ForeColor = System.Drawing.Color.Black;
             DifferenceBx.Location = new System.Drawing.Point(95, 80);
             DifferenceBx.Name = "DifferenceBx";
@@ -310,7 +288,7 @@ namespace SignatureMaker
             // DifferenceLbl
             // 
             DifferenceLbl.BackColor = System.Drawing.Color.Transparent;
-            DifferenceLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DifferenceLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             DifferenceLbl.Location = new System.Drawing.Point(5, 80);
             DifferenceLbl.Name = "DifferenceLbl";
             DifferenceLbl.Size = new System.Drawing.Size(85, 25);
@@ -341,7 +319,7 @@ namespace SignatureMaker
             // BaseBx
             // 
             BaseBx.BackColor = System.Drawing.Color.White;
-            BaseBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BaseBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             BaseBx.ForeColor = System.Drawing.Color.Black;
             BaseBx.FormattingEnabled = true;
             BaseBx.Location = new System.Drawing.Point(95, 20);
@@ -353,7 +331,7 @@ namespace SignatureMaker
             // 
             CompareBx.BackColor = System.Drawing.Color.White;
             CompareBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            CompareBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CompareBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             CompareBx.ForeColor = System.Drawing.Color.Black;
             CompareBx.Location = new System.Drawing.Point(95, 50);
             CompareBx.Name = "CompareBx";
@@ -363,7 +341,7 @@ namespace SignatureMaker
             // CompareLbl
             // 
             CompareLbl.BackColor = System.Drawing.Color.Transparent;
-            CompareLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            CompareLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             CompareLbl.Location = new System.Drawing.Point(5, 50);
             CompareLbl.Name = "CompareLbl";
             CompareLbl.Size = new System.Drawing.Size(85, 25);
@@ -374,7 +352,7 @@ namespace SignatureMaker
             // BaseLbl
             // 
             BaseLbl.BackColor = System.Drawing.Color.Transparent;
-            BaseLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BaseLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             BaseLbl.Location = new System.Drawing.Point(5, 20);
             BaseLbl.Name = "BaseLbl";
             BaseLbl.Size = new System.Drawing.Size(85, 25);
@@ -413,7 +391,7 @@ namespace SignatureMaker
             // StatusLbl
             // 
             StatusLbl.BackColor = System.Drawing.Color.Transparent;
-            StatusLbl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            StatusLbl.Font = new System.Drawing.Font("Segoe UI", 9F);
             StatusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
             StatusLbl.Location = new System.Drawing.Point(95, 110);
             StatusLbl.Name = "StatusLbl";
@@ -446,7 +424,7 @@ namespace SignatureMaker
             // 
             MaskBx.BackColor = System.Drawing.Color.White;
             MaskBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            MaskBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MaskBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             MaskBx.ForeColor = System.Drawing.Color.Black;
             MaskBx.Location = new System.Drawing.Point(95, 50);
             MaskBx.Name = "MaskBx";
@@ -467,7 +445,7 @@ namespace SignatureMaker
             // 
             BytesBx.BackColor = System.Drawing.Color.White;
             BytesBx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            BytesBx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BytesBx.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             BytesBx.ForeColor = System.Drawing.Color.Black;
             BytesBx.Location = new System.Drawing.Point(95, 20);
             BytesBx.Name = "BytesBx";
@@ -477,7 +455,7 @@ namespace SignatureMaker
             // MaskLbl
             // 
             MaskLbl.BackColor = System.Drawing.Color.Transparent;
-            MaskLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MaskLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             MaskLbl.Location = new System.Drawing.Point(6, 50);
             MaskLbl.Name = "MaskLbl";
             MaskLbl.Size = new System.Drawing.Size(85, 25);
@@ -488,7 +466,7 @@ namespace SignatureMaker
             // BytesLbl
             // 
             BytesLbl.BackColor = System.Drawing.Color.Transparent;
-            BytesLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            BytesLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             BytesLbl.Location = new System.Drawing.Point(5, 20);
             BytesLbl.Name = "BytesLbl";
             BytesLbl.Size = new System.Drawing.Size(85, 25);
@@ -529,7 +507,7 @@ namespace SignatureMaker
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem FileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ModeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AboutMenuItem;
         private System.Windows.Forms.MenuStrip MenuCtrl;
         private System.Windows.Forms.GroupBox ProcessGroupBx;
@@ -543,7 +521,6 @@ namespace SignatureMaker
         private System.Windows.Forms.Button PasteBtn;
         private System.Windows.Forms.Button RefreshBtn;
         private System.Windows.Forms.Button CreateBtn;
-        private System.Windows.Forms.ToolStripMenuItem ModesMenuItem;
         private System.Windows.Forms.GroupBox InputGroupBx;
         private System.Windows.Forms.Button SwapBtn;
         private System.Windows.Forms.Button CompareBtn;
@@ -562,11 +539,10 @@ namespace SignatureMaker
         private System.Windows.Forms.TextBox BytesBx;
         private System.Windows.Forms.Label MaskLbl;
         private System.Windows.Forms.Label BytesLbl;
-        private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
         private System.Windows.Forms.Label StatusLbl;
         private System.Windows.Forms.ToolStripMenuItem HexMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EscapedMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ByteArrayMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ArrayMenuItem;
     }
 }
 

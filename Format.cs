@@ -1,10 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace SignatureMaker
 {
     public class Format
     {
+        public static bool IsStringHexadecimal(string str)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                Int64 temp = 0;
+
+                if (Int64.TryParse(str, NumberStyles.HexNumber, null, out temp))
+                {
+                    return (temp > 0);
+                }
+            }
+
+            return false;
+        }
+
         public static string CompareBytes(string originalArray, string compareArray)
         {
             originalArray = originalArray.Replace("?", "0").Replace(" ", "");
@@ -107,7 +124,7 @@ namespace SignatureMaker
 
             foreach (string str in arraySplit)
             {
-                if ((String.IsNullOrEmpty(str)) || str.Contains("?"))
+                if (string.IsNullOrEmpty(str) || str.Contains("?"))
                 {
                     createdHex += "00";
                 }
@@ -168,9 +185,7 @@ namespace SignatureMaker
 
             for (Int32 i = 0; i < charArray.Length; i += 2)
             {
-                if ((charArray[i] != '?')
-                    && ((i + 1) < charArray.Length)
-                    && (charArray[(i + 1)] != '?'))
+                if ((charArray[i] != '?') && ((i + 1) < charArray.Length)  && (charArray[(i + 1)] != '?'))
                 {
                     createdMask += "x";
                 }

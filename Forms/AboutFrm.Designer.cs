@@ -44,7 +44,7 @@ namespace SignatureMaker
             // 
             GitHubLbl.BackColor = System.Drawing.Color.Transparent;
             GitHubLbl.Cursor = System.Windows.Forms.Cursors.Hand;
-            GitHubLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            GitHubLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline);
             GitHubLbl.ForeColor = System.Drawing.Color.DodgerBlue;
             GitHubLbl.Location = new System.Drawing.Point(103, 69);
             GitHubLbl.Name = "GitHubLbl";
@@ -58,20 +58,20 @@ namespace SignatureMaker
             // 
             IconsLbl.BackColor = System.Drawing.Color.Transparent;
             IconsLbl.Cursor = System.Windows.Forms.Cursors.Hand;
-            IconsLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            IconsLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Underline);
             IconsLbl.ForeColor = System.Drawing.Color.DodgerBlue;
             IconsLbl.Location = new System.Drawing.Point(103, 99);
             IconsLbl.Name = "IconsLbl";
             IconsLbl.Size = new System.Drawing.Size(255, 30);
             IconsLbl.TabIndex = 9;
-            IconsLbl.Text = "www.icons8.com";
+            IconsLbl.Text = "www.remixicon.com";
             IconsLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             IconsLbl.Click += IconsLbl_Click;
             // 
             // VersionLbl
             // 
             VersionLbl.BackColor = System.Drawing.Color.Transparent;
-            VersionLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            VersionLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             VersionLbl.Location = new System.Drawing.Point(103, 39);
             VersionLbl.Name = "VersionLbl";
             VersionLbl.Size = new System.Drawing.Size(255, 30);
@@ -82,7 +82,7 @@ namespace SignatureMaker
             // ArchetypeLbl
             // 
             ArchetypeLbl.BackColor = System.Drawing.Color.Transparent;
-            ArchetypeLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ArchetypeLbl.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             ArchetypeLbl.Location = new System.Drawing.Point(103, 9);
             ArchetypeLbl.Name = "ArchetypeLbl";
             ArchetypeLbl.Size = new System.Drawing.Size(255, 30);
@@ -93,7 +93,7 @@ namespace SignatureMaker
             // GitHubTitle
             // 
             GitHubTitle.BackColor = System.Drawing.Color.Transparent;
-            GitHubTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            GitHubTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             GitHubTitle.Location = new System.Drawing.Point(12, 69);
             GitHubTitle.Name = "GitHubTitle";
             GitHubTitle.Size = new System.Drawing.Size(85, 30);
@@ -104,7 +104,7 @@ namespace SignatureMaker
             // IconsTitle
             // 
             IconsTitle.BackColor = System.Drawing.Color.Transparent;
-            IconsTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            IconsTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             IconsTitle.Location = new System.Drawing.Point(12, 99);
             IconsTitle.Name = "IconsTitle";
             IconsTitle.Size = new System.Drawing.Size(85, 30);
@@ -115,7 +115,7 @@ namespace SignatureMaker
             // VersionTitle
             // 
             VersionTitle.BackColor = System.Drawing.Color.Transparent;
-            VersionTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            VersionTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             VersionTitle.Location = new System.Drawing.Point(12, 39);
             VersionTitle.Name = "VersionTitle";
             VersionTitle.Size = new System.Drawing.Size(85, 30);
@@ -126,7 +126,7 @@ namespace SignatureMaker
             // ArchetypeTitle
             // 
             ArchetypeTitle.BackColor = System.Drawing.Color.Transparent;
-            ArchetypeTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ArchetypeTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             ArchetypeTitle.Location = new System.Drawing.Point(12, 9);
             ArchetypeTitle.Name = "ArchetypeTitle";
             ArchetypeTitle.Size = new System.Drawing.Size(85, 30);
