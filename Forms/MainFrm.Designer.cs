@@ -85,7 +85,7 @@ namespace SignatureMaker
             // 
             HexMenuItem.Image = Properties.Resources.Hex;
             HexMenuItem.Name = "HexMenuItem";
-            HexMenuItem.Size = new System.Drawing.Size(180, 22);
+            HexMenuItem.Size = new System.Drawing.Size(152, 22);
             HexMenuItem.Text = "Hex";
             HexMenuItem.Click += HexMenuItem_Click;
             // 
@@ -93,7 +93,7 @@ namespace SignatureMaker
             // 
             EscapedMenuItem.Image = Properties.Resources.Escaped;
             EscapedMenuItem.Name = "EscapedMenuItem";
-            EscapedMenuItem.Size = new System.Drawing.Size(180, 22);
+            EscapedMenuItem.Size = new System.Drawing.Size(152, 22);
             EscapedMenuItem.Text = "> Hex Escaped";
             EscapedMenuItem.Click += EscapedMenuItem_Click;
             // 
@@ -102,7 +102,7 @@ namespace SignatureMaker
             ArrayMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             ArrayMenuItem.Image = Properties.Resources.Array;
             ArrayMenuItem.Name = "ArrayMenuItem";
-            ArrayMenuItem.Size = new System.Drawing.Size(180, 22);
+            ArrayMenuItem.Size = new System.Drawing.Size(152, 22);
             ArrayMenuItem.Text = "Byte Array";
             ArrayMenuItem.Click += ArrayMenuItem_Click;
             // 
@@ -392,7 +392,7 @@ namespace SignatureMaker
             // 
             StatusLbl.BackColor = System.Drawing.Color.Transparent;
             StatusLbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            StatusLbl.ForeColor = System.Drawing.Color.DodgerBlue;
+            StatusLbl.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
             StatusLbl.Location = new System.Drawing.Point(95, 110);
             StatusLbl.Name = "StatusLbl";
             StatusLbl.Size = new System.Drawing.Size(390, 25);

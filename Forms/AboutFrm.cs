@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SignatureMaker.Framework;
 
 namespace SignatureMaker
 {
     public partial class AboutFrm : Form
     {
-        private static bool _x64Bit = true;
-        private static string _version = "v2.6";
-
         public AboutFrm()
         {
             InitializeComponent();
@@ -16,18 +14,9 @@ namespace SignatureMaker
 
         private void AboutFrm_Load(object sender, EventArgs e)
         {
-            if (_x64Bit)
-            {
-                this.Text = "ItsBranK's Signature Maker (x64) - About";
-                ArchetypeLbl.Text = "x64";
-            }
-            else
-            {
-                this.Text = "ItsBranK's Signature Maker (x32) - About";
-                ArchetypeLbl.Text = "x32";
-            }
-
-            VersionLbl.Text = _version;
+            this.Text = (Assembly.GetTitle() + " - About");
+            ArchetypeLbl.Text = (Assembly.Is64Bit() ? "x64" : "x86");
+            VersionLbl.Text = ("v" + Assembly.GetVersion());
         }
 
         private void GitHubLbl_Click(object sender, EventArgs e)

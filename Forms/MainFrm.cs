@@ -1,11 +1,12 @@
-﻿#define X64BIT
-using System;
+﻿using System;
 using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using SignatureMaker.Framwork;
+using System.Reflection;
 
 namespace SignatureMaker
 {
@@ -29,8 +30,6 @@ namespace SignatureMaker
     {
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
-
-        private static bool _x64Bit = true;
         OutputModes _outputMode = OutputModes.HexEscaped; // Current output mode selected by the user.
         string _textArray = ""; // Used for testing if the pattern you created works using "FindPattern".
 
@@ -41,15 +40,7 @@ namespace SignatureMaker
 
         private void MainFrm_Load(object sender, EventArgs e)
         {
-            if (_x64Bit)
-            {
-                this.Text = "ItsBranK's Signature Maker (x64)";
-            }
-            else
-            {
-                this.Text = "ItsBranK's Signature Maker (x32)";
-            }
-
+            this.Text = Framework.Assembly.GetTitle();
             LoadProcesses();
         }
 
@@ -237,7 +228,7 @@ namespace SignatureMaker
 
                 if (process != null)
                 {
-                    IntPtr addressPointer = (IntPtr)(_x64Bit ? Int64.Parse(addressStr, NumberStyles.HexNumber) : Int32.Parse(addressStr, NumberStyles.HexNumber));
+                    IntPtr addressPointer = (IntPtr)(Framework.Assembly.Is64Bit() ? Int64.Parse(addressStr, NumberStyles.HexNumber) : Int32.Parse(addressStr, NumberStyles.HexNumber));
 
                     byte[] foundBytes = ReadMemory(process.Handle, addressPointer, (Int32)LengthBx.Value);
 

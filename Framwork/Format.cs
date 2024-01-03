@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Windows.Forms;
 
-namespace SignatureMaker
+namespace SignatureMaker.Framwork
 {
     public class Format
     {
@@ -11,11 +10,11 @@ namespace SignatureMaker
         {
             if (!string.IsNullOrEmpty(str))
             {
-                Int64 temp = 0;
+                long temp = 0;
 
-                if (Int64.TryParse(str, NumberStyles.HexNumber, null, out temp))
+                if (long.TryParse(str, NumberStyles.HexNumber, null, out temp))
                 {
-                    return (temp > 0);
+                    return temp > 0;
                 }
             }
 
@@ -30,7 +29,7 @@ namespace SignatureMaker
             char[] compareChars = compareArray.ToCharArray();
             string comparedBytes = "";
 
-            for (Int32 i = 0; i < originalArray.Length; i++)
+            for (int i = 0; i < originalArray.Length; i++)
             {
                 if (i < compareArray.Length)
                 {
@@ -47,14 +46,14 @@ namespace SignatureMaker
 
             if (originalArray.Length < compareArray.Length)
             {
-                for (Int32 i = originalArray.Length; i < compareArray.Length; i++)
+                for (int i = originalArray.Length; i < compareArray.Length; i++)
                 {
                     comparedBytes += compareChars[i];
                 }
             }
             else if (originalArray.Length > compareArray.Length)
             {
-                for (Int32 i = compareArray.Length; i < originalArray.Length; i++)
+                for (int i = compareArray.Length; i < originalArray.Length; i++)
                 {
                     comparedBytes += originalArray[i].ToString();
                 }
@@ -85,17 +84,17 @@ namespace SignatureMaker
             char[] charArray = arrayOfBytes.ToCharArray();
             string formattedArray = "";
 
-            Int32 index = 0;
+            int index = 0;
 
-            for (Int32 i = 0; i < charArray.Length; i++)
+            for (int i = 0; i < charArray.Length; i++)
             {
                 formattedArray += charArray[i].ToString();
 
                 if (i == charArray.Length - 1)
                 {
-                    if ((i + 2) <= charArray.Length)
+                    if (i + 2 <= charArray.Length)
                     {
-                        formattedArray = formattedArray.Insert((i + 2), " ");
+                        formattedArray = formattedArray.Insert(i + 2, " ");
                     }
                 }
                 else
@@ -140,7 +139,7 @@ namespace SignatureMaker
         // Creates a hex escaped version of "CreateHex".
         public static string CreateHexEscaped(string arrayOfBytes)
         {
-            string createdHex = ("\\x" + CreateHex(arrayOfBytes));
+            string createdHex = "\\x" + CreateHex(arrayOfBytes);
             return createdHex.Replace(" ", "\\x");
         }
 
@@ -149,9 +148,9 @@ namespace SignatureMaker
             arrayOfBytes = arrayOfBytes.Replace("?", "0");
             string createdArray = "0x";
 
-            Int32 index = 0;
+            int index = 0;
 
-            for (Int32 i = 0; i < arrayOfBytes.Length; i++)
+            for (int i = 0; i < arrayOfBytes.Length; i++)
             {
                 if (i != arrayOfBytes.Length)
                 {
@@ -165,7 +164,7 @@ namespace SignatureMaker
                         index = 0;
                         createdArray += arrayOfBytes[i].ToString();
 
-                        if (i != (arrayOfBytes.Length - 1) && (i + 2) <= arrayOfBytes.Length)
+                        if (i != arrayOfBytes.Length - 1 && i + 2 <= arrayOfBytes.Length)
                         {
                             createdArray += ", 0x";
                         }
@@ -183,13 +182,13 @@ namespace SignatureMaker
             char[] charArray = arrayOfBytes.ToCharArray();
             string createdMask = "";
 
-            for (Int32 i = 0; i < charArray.Length; i += 2)
+            for (int i = 0; i < charArray.Length; i += 2)
             {
-                if ((charArray[i] != '?') && ((i + 1) < charArray.Length)  && (charArray[(i + 1)] != '?'))
+                if (charArray[i] != '?' && i + 1 < charArray.Length && charArray[i + 1] != '?')
                 {
                     createdMask += "x";
                 }
-                else if ((i + 1) < charArray.Length)
+                else if (i + 1 < charArray.Length)
                 {
                     createdMask += "?";
                 }
@@ -208,7 +207,7 @@ namespace SignatureMaker
             {
                 if (c == '?')
                 {
-                    createdMask += ((c == '?') ? "?" : "x");
+                    createdMask += c == '?' ? "?" : "x";
                 }
             }
 
