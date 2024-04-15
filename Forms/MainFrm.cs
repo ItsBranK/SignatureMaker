@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using SignatureMaker.Framwork;
-using System.Reflection;
 
 namespace SignatureMaker
 {
@@ -30,8 +29,8 @@ namespace SignatureMaker
     {
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr handle, IntPtr baseAddress, [Out] byte[] buffer, Int32 size, out IntPtr numberOfBytesRead);
-        OutputModes _outputMode = OutputModes.HexEscaped; // Current output mode selected by the user.
-        string _textArray = ""; // Used for testing if the pattern you created works using "FindPattern".
+        OutputModes m_outputMode = OutputModes.HexEscaped; // Current output mode selected by the user.
+        string m_textArray = ""; // Used for testing if the pattern you created works using "FindPattern".
 
         public MainFrm()
         {
@@ -145,12 +144,12 @@ namespace SignatureMaker
 
         private void SetMode(OutputModes mode)
         {
-            _outputMode = mode;
+            m_outputMode = mode;
             HexMenuItem.Text = "Hex";
             EscapedMenuItem.Text = "Hex Escaped";
             ArrayMenuItem.Text = "Byte Array";
 
-            switch (_outputMode)
+            switch (m_outputMode)
             {
                 case OutputModes.Hex:
                     HexMenuItem.Text = "> Hex";
@@ -286,7 +285,7 @@ namespace SignatureMaker
                 DifferenceBx.Text = Format.FormatSpacing(comparedBytes);
                 MaskBx.Text = Format.CreateHalfMask(comparedBytes);
 
-                switch (_outputMode)
+                switch (m_outputMode)
                 {
                     case OutputModes.Hex:
                         BytesBx.Text = Format.CreateHex(comparedBytes);
@@ -308,7 +307,7 @@ namespace SignatureMaker
                     SetStatus("No difference detected, given array of bytes match!", StatusTypes.Success);
                 }
 
-                _textArray = Format.CreateHex(comparedBytes);
+                m_textArray = Format.CreateHex(comparedBytes);
             }
             else
             {
@@ -360,13 +359,13 @@ namespace SignatureMaker
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !string.IsNullOrEmpty(_textArray))
+            if (!string.IsNullOrEmpty(BytesBx.Text) && !string.IsNullOrEmpty(MaskBx.Text) && !string.IsNullOrEmpty(m_textArray))
             {
                 Process process = FindProcess((Int32)PIDBx.Value);
 
                 if (process != null)
                 {
-                    IntPtr foundPointer = FindPattern(process, Format.FormatSpacing(_textArray), MaskBx.Text);
+                    IntPtr foundPointer = FindPattern(process, Format.FormatSpacing(m_textArray), MaskBx.Text);
 
                     if (foundPointer != IntPtr.Zero)
                     {
